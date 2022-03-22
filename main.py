@@ -2,97 +2,76 @@ from mesa.visualization.UserParam import UserSettableParameter
 from mesa.visualization.modules import CanvasGrid, ChartModule
 from mesa.visualization.ModularVisualization import ModularServer
 
-from agents.grass import GrassPatch
-from agents.human import Human
-from agents.sheep import Sheep
-from agents.wolf import Wolf
 from models import AgenBayaran
+from agents.bayaran import Bayaran
+from agents.pemilih import Pemilih
 
 
-def wolf_sheep_portrayal(agent):
+def bayaran_portrayal(agent):
     if agent is None:
         return
 
     portrayal = dict()
 
-    if type(agent) is Sheep:
-        portrayal["Shape"] = "statics/sheep.png"
-        portrayal["scale"] = 0.9
-        portrayal["Layer"] = 1
-
-    elif type(agent) is Wolf:
-        portrayal["Shape"] = "statics/wolf.png"
-        portrayal["scale"] = 0.9
-        portrayal["Layer"] = 2
-        portrayal["text"] = round(agent.energy, 1)
-        portrayal["text_color"] = "White"
-
-    elif type(agent) is Human:
-        portrayal["Shape"] = "statics/human.png"
+    if type(agent) is Bayaran:
+        portrayal["Shape"] = "statics/bayaran.png"
         portrayal["scale"] = 0.9
         portrayal["Layer"] = 3
         portrayal["text_color"] = "White"
 
-    elif type(agent) is GrassPatch:
-        if agent.fully_grown:
-            portrayal["Color"] = ["#00FF00", "#00CC00", "#009900"]
+    elif type(agent) is Pemilih:
+        if agent.keinginan >= 0.8:
+            portrayal["Color"] = "green"
+            portrayal["Layer"] = 0
+            portrayal["w"] = 1
+            portrayal["h"] = 1
+        elif 0.5 < agent.keinginan < 0.8:
+            portrayal["Color"] = "gray"
+            portrayal["Layer"] = 1
+            portrayal["w"] = 0.7
+            portrayal["h"] = 0.7
         else:
-            portrayal["Color"] = ["#84e184", "#adebad", "#d6f5d6"]
+            portrayal["Color"] = "red"
+            portrayal["Layer"] = 2
+            portrayal["w"] = 0.5
+            portrayal["h"] = 0.5
+
         portrayal["Shape"] = "rect"
         portrayal["Filled"] = "true"
-        portrayal["Layer"] = 0
-        portrayal["w"] = 1
-        portrayal["h"] = 1
 
     return portrayal
 
 
 if __name__ == "__main__":
-    canvas_element = CanvasGrid(wolf_sheep_portrayal, 20, 20, 500, 500)
+    canvas_element = CanvasGrid(bayaran_portrayal, 20, 20, 500, 500)
     chart_element = ChartModule(
         [
-            {"Label": "Wolves", "Color": "#AA0000"},
-            {"Label": "Sheep", "Color": "#666666"},
-            {"Label": "Human", "Color": "#CECECE"}
+            {"Label": "Milih", "Color": "green"},
+            {"Label": "Ragu_ragu", "Color": "gray"},
+            {"Label": "Tidak_milih", "Color": "red"}
         ]
     )
 
     model_params = {
-        "grass": UserSettableParameter("checkbox", "Grass Enabled", True),
-        "grass_regrowth_time": UserSettableParameter(
-            "slider", "Grass Regrowth Time", 20, 1, 50
+        "initial_agen_bayaran": UserSettableParameter(
+            "slider", "Jumlah agen bayaran", 10, 1, 15
         ),
-        "initial_human": UserSettableParameter(
-            "slider", "Initial Human Population", 8, 1, 10
+        "initial_pemilih": UserSettableParameter(
+            "slider", "Jumlah pemilih", 100, 50, 350
         ),
-        "initial_sheep": UserSettableParameter(
-            "slider", "Initial Sheep Population", 100, 10, 300
+        "radius_pembanding": UserSettableParameter(
+            "slider", "Radius pengamatan pemilih", 2, 1, 4
         ),
-        "sheep_reproduce": UserSettableParameter(
-            "slider", "Sheep Reproduction Rate", 0.04, 0.01, 1.0, 0.01
+        "initial_uang": UserSettableParameter(
+            "slider", "Jumlah uang", 500, 100, 1000
         ),
-        "initial_wolves": UserSettableParameter(
-            "slider", "Initial Wolf Population", 50, 10, 300
-        ),
-        "wolf_reproduce": UserSettableParameter(
-            "slider",
-            "Wolf Reproduction Rate",
-            0.05,
-            0.01,
-            1.0,
-            0.01,
-            description="The rate at which wolf agents reproduce.",
-        ),
-        "wolf_gain_from_food": UserSettableParameter(
-            "slider", "Wolf Gain From Food Rate", 20, 1, 50
-        ),
-        "sheep_gain_from_food": UserSettableParameter(
-            "slider", "Sheep Gain From Food", 4, 1, 10
-        ),
+        "pengeluaran_uang": UserSettableParameter(
+            "slider", "Jumlah uang yang dikeluarkan", 25, 10, 50
+        )
     }
 
     server = ModularServer(
-        AgenBayaran, [canvas_element, chart_element], "Wolf Sheep Predation", model_params
+        AgenBayaran, [canvas_element, chart_element], "SOP Pemilihan Ketua", model_params
     )
     server.port = 8080
     server.verbose = False
