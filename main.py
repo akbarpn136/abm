@@ -53,6 +53,9 @@ if __name__ == "__main__":
     )
 
     model_params = {
+        "peforma": UserSettableParameter(
+            "slider", "Peforma calon pemimpin", 0.5, 0.1, 1.0, 0.1
+        ),
         "initial_agen_bayaran": UserSettableParameter(
             "slider", "Jumlah agen bayaran", 10, 1, 15
         ),
