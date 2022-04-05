@@ -1,6 +1,6 @@
 from mesa import Model
 from mesa.space import MultiGrid
-from mesa.time import RandomActivationByType
+from mesa.time import RandomActivation
 from mesa.datacollection import DataCollector
 
 from agents.bayaran import Bayaran
@@ -17,6 +17,7 @@ class AgenBayaran(Model):
             self,
             width=20,
             height=20,
+            peforma=0.5,
             radius_pembanding=2,
             initial_uang=500,
             pengeluaran_uang=50,
@@ -27,13 +28,14 @@ class AgenBayaran(Model):
 
         self.width = width
         self.height = height
+        self.peforma = peforma
         self.radius_pembanding = radius_pembanding
         self.pengeluaran_uang = pengeluaran_uang
         self.initial_uang = initial_uang
         self.initial_agen_bayaran = initial_agen_bayaran
         self.initial_pemilih = initial_pemilih
 
-        self.schedule = RandomActivationByType(self)
+        self.schedule = RandomActivation(self)
         self.grid = MultiGrid(self.width, self.height, torus=True)
         self.datacollector = DataCollector(
             {
