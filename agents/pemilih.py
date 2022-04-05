@@ -13,14 +13,14 @@ class Pemilih(RandomWalker):
         self.keinginan = keinginan
         self.threshold_max = 0.8
         self.threshold_min = 0.5
-        self.peforma = self.random.uniform(0, 0.7)
+        self.peforma = model.peforma
 
         if self.pemberian <= 10:
-            self.skor = 0.1
+            self.skor = 0.01
         elif 10 < self.pemberian < 25:
-            self.skor = 0.5
+            self.skor = 0.2
         else:
-            self.skor = 0.8
+            self.skor = 0.5
 
     def step(self):
         self.random_move()
@@ -29,9 +29,9 @@ class Pemilih(RandomWalker):
         pemilih = [obj for obj in pemilih_sekitar if isinstance(obj, Pemilih)]
         jumlah_individu = sum(map(lambda individu: individu.keinginan >= self.threshold_max, pemilih))
 
-        noise = self.random.uniform(-1, 1)
+        noise = self.random.uniform(-0.1, 0.1)
         if len(pemilih) > 0:
-            if jumlah_individu / len(pemilih) >= 0.5:
+            if jumlah_individu / len(pemilih) >= 0.7:
                 self.keinginan += self.peforma + noise * self.skor
 
         if self.keinginan >= 1:
