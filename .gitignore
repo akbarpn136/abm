@@ -138,3 +138,9 @@ dmypy.json
 *.pdf
 
 *.toc
+
+*.bbl
+
+*.blg
+
+*.gz
