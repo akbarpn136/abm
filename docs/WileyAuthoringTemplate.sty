@@ -13,8 +13,6 @@
 %\DeclareOption{number}{\xdef\@biboptions{numbers}}%
 %\DeclareOption{numbers}{\xdef\@biboptions{numbers}}%
 
-\bibliographystyle{plainnat}% this can be used both for numerical and authoryear citations.
-
 \newdimen\hsizevalue%
 \newdimen\vsizevalue%
 \columnseprule\z@%
@@ -132,8 +130,8 @@
 \ifParaList%
 \setlength{\leftmargin}{0pt}%
 \setlength{\itemindent}{1em}%
-\advance\itemindent by \labelwidth% 
-\advance\itemindent by \labelsep% 
+\advance\itemindent by \labelwidth%
+\advance\itemindent by \labelsep%
 \fi%
 \ifRoundPunctuation%
 \def\makelabel##1{\hss\llap{(##1)}}%
@@ -494,10 +492,10 @@
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
-      \leavevmode 
+      \leavevmode
       \advance\leftskip\@tempdima
       \hskip -\leftskip
-#1\nobreak\hfil \nobreak\hbox 
+#1\nobreak\hfil \nobreak\hbox
 to\@pnumwidth{\hss #2}\par
       \penalty\@highpenalty
     \endgroup
@@ -506,7 +504,7 @@ to\@pnumwidth{\hss #2}\par
 
 %% Sections %%
 
-\def\numbered{\setcounter{secnumdepth}{3}}% 
+\def\numbered{\setcounter{secnumdepth}{3}}%
 \def\unnumbered{\setcounter{secnumdepth}{0}}%
 \numbered%
 
@@ -572,7 +570,7 @@ to\@pnumwidth{\hss #2}\par
 
 \newenvironment{objectives}%
                {\begingroup\parindent=0pt\parskip=0pt%
-                \hbox{\rule{\textwidth}{1pt}}\par%  
+                \hbox{\rule{\textwidth}{1pt}}\par%
                 \removelastskip\vskip6pt\nointerlineskip%
 		\begin{itemize}
                 }%
@@ -704,7 +702,7 @@ to\@pnumwidth{\hss #2}\par
   \list{\csname\@itemitem\endcsname}%
        {\setlength{\labelsep}{6pt}%
         \setlength\leftmargin{6pt}%
-        \advance\leftmargin by \labelsep% 
+        \advance\leftmargin by \labelsep%
         \setlength\itemsep{0pt}
         \setlength{\partopsep}{0pt}%
         \setlength{\parsep}{0pt}%
@@ -857,7 +855,7 @@ to\@pnumwidth{\hss #2}\par
 \def\ftype@scheme{3}
 \newcounter{scheme}[chapter]
 \renewcommand\thescheme{\thechapter.\@arabic\c@scheme}%
-\newcommand\schemename{Scheme}% 
+\newcommand\schemename{Scheme}%
 \def\fnum@scheme{\schemename~\thescheme}%
 
 \long\def\Schemecaption#1{\begingroup%
@@ -1144,7 +1142,7 @@ however, may not be available in electronic format.
 #2
 Printed in the United States of America.\\
 
-10\ \ 9\ \ 8\ \ 7\ \ 6\ \ 5\ \  4\ \ 3\ \ 2\ \ 1 
+10\ \ 9\ \ 8\ \ 7\ \ 6\ \ 5\ \  4\ \ 3\ \ 2\ \ 1
 \vskip24pt
 \egroup\let\@badend\relax\endgroup}
 
@@ -1302,14 +1300,14 @@ Printed in the United States of America.\\
 
 %% Macros for Bibliography %%
 
-\@ifpackageloaded{natbib}{%
-\@namedef{thebibliography*}{\def\bibsection{}\thebibliography}
-\@namedef{endthebibliography*}{\endthebibliography}
-}
-{
-\@namedef{thebibliography*}{\def\refname{}\thebibliography}
-\@namedef{endthebibliography*}{\endthebibliography}
-}
+%\@ifpackageloaded{natbib}{%
+%\@namedef{thebibliography*}{\def\bibsection{}\thebibliography}
+%\@namedef{endthebibliography*}{\endthebibliography}
+%}
+%{
+%\@namedef{thebibliography*}{\def\refname{}\thebibliography}
+%\@namedef{endthebibliography*}{\endthebibliography}
+%}
 %
 \def\@bibtype{}
 \def\bibtype#1{\gdef\@bibtype{#1}}
@@ -1343,11 +1341,11 @@ Printed in the United States of America.\\
 
 \def\halftitlepage{\thispagestyle{empty}
   \vspace*{2pc}%
-  {\parindent \z@ 
+  {\parindent \z@
     \interlinepenalty\@M
 \LARGE
 \hyphenpenalty10000
-\bfseries 
+\bfseries
 \noindent\thetitle\vskip 1sp
 }
 \newpage
@@ -1358,7 +1356,7 @@ Printed in the United States of America.\\
 \vbox to\vsize{\vspace*{36pt}%
 \hrule height3pt
 \vskip2pc
-\parindent \z@ 
+\parindent \z@
 \interlinepenalty\@M
 \Huge
 \hyphenpenalty10000
