@@ -1,85 +1,37 @@
-\chapter{Pendahuluan}
+\section{Pendahuluan}
 
-\textit{Agen} merupakan individu atau objek yang memiliki ciri khas dan tindakan serta tujuan untuk melakukan suatu perhitungan tertentu secara otomatis dalam suatu lingkungan. Agent Based Modeling (ABM) merupakan suatu fenomena interaksi antar agen atau agen dengan lingkungan dalam suatu lingkungan yang dapat dibuatkan ke dalam model komputasi. Lingkungan merupakan suatu bentangan di mana agen-agen dapat berinteraksi, dipetakan, memiliki hubungan, dan digambarkan ke dalam bentuk data. Melalui pendekatan ABM, dapat memudahkan dalam melakukan eksplorasi, visualisasi dan analisis fenomena alam yang terjadi.
+\lettrine{A}{gen} merupakan individu atau objek yang memiliki ciri khas dan tindakan serta tujuan untuk melakukan suatu perhitungan tertentu secara otomatis dalam suatu lingkungan. Agent Based Modeling (ABM) merupakan suatu fenomena interaksi antar agen atau agen dengan lingkungan dalam suatu lingkungan yang dapat dibuatkan ke dalam model komputasi. Lingkungan merupakan suatu bentangan di mana agen-agen dapat berinteraksi, dipetakan, memiliki hubungan, dan digambarkan ke dalam bentuk data. Melalui pendekatan ABM, dapat memudahkan dalam melakukan eksplorasi, visualisasi dan analisis fenomena alam yang terjadi.
 
-\section{This is First Level Heading}
+Perwujudan berbasis agen ini lebih mudah dipahami ketimbang perwujudan matematika untuk fenomena yang sama. Hal ini dikarenakan ABM dibangun dari masing-masing individu dan memiliki peraturan sederhana untuk perilaku masing-masing individu tersebut, sedangkan di sisi model lain dibangun atas dasar simbol-simbol persamaan matematika. Sebagai gambaran umum, ABM menyimbolkan dengan interaksi antar individu sedangkan di pemodelan matematika dapat dianalogikan dengan laju perubahan agregat dalam persamaan diferensial. Dengan keunggulan yang dimiliki ABM ini, menyebabkan pendekatan tersebut sering digunakan dalam sistem kompleks.
 
-\lipsum[1-2]
+\subsection{Sistem Kompleks dan Emergence}
 
-\subsection{This is Second Level Heading}
+Sistem kompleks terus mengalami peningkatan dan perkembangan. Teori sistem kompleks memiliki prinsip untuk memahami kompleksitas yang terjadi di dunia dan sekaligus mendefinisikan sebagai sistem yang tersusun dari beberapa elemen penyusun atau individu yang saling berinteraksi sehingga membentuk suatu ciri khas atau perilaku yang berbeda dari elemen penyusun atau individu aslinya. Istilah ini sering disebut dengan fenomena \textit{emergence}. Definisi lain dari \textit{emergence} adalah munculnya suatu kebaruan dan kejelasan struktur (aturan), pola dan ciri khas melalui hasil interaksi dari berbagai elemen atau individu dalam lingkungan tertentu \cite{wilensky2015introduction}.
 
-\lipsum[3]
+Fenomena \textit{emergence} ini tidak hanya berdasarkan ciri khas, namun dipengaruhi juga dari interaksi antar individu dan tanpa pemimpin atau koordinator di dalamnya. Struktur atau aturan pada tingkatan mikro dapat mengarahkan ke suatu pola tertentu pada tingkatan makro.
 
-For example, multiple citations from the \index{bibliography} of this \index{article}:
-citet: \citet{miller2004standing,wilensky2015introduction}, citep: \citep{miller2004standing,wilensky2015introduction}.
-As you see in Table~\ref{tab1-2}, the citations are \index{automatically!hyperlinked!citations} to their
-reference in the bibliography. Refer Figure~\ref{fig1-1} for details:
+Secara singkat sistem kompleks terdiri dari susunan atau gabungan dari banyak bagian interaksi dan dapat dengan mudah melihat secara garis besar fenomena yang terjadi. Di dalam sistem kompleks terdapat metodologi penting yang dikenal dengan ABM.
 
-\begin{figure}
-\includegraphics{01.eps}
-\caption{Figure Caption. Figure Caption.
-Figure Caption. Figure Caption. Figure Caption.
-Figure Caption. Figure Caption.
-\label{fig1-1}}
-\end{figure}
+\subsection{Karakteristik Penting ABM}
 
-For example, multiple citations from the \index{bibliography} of this \index{article}:
-citet: \citet{miller2004standing}
-As you see in Table~\ref{tab1-1}, the citations are \index{main entry with turn over lines main entry with turn over lines!subentry with turn over lines subentry with turn over lines!subsubentry with turn over lines subsubentry with turn over lines} to their
-reference in the bibliography (Equation~\ref{eq1-1}).
-\begin{equation}
-\mathcal{L}\quad \mathbf{\mathcal{L}} = i \bar{\psi} \gamma^\mu D_\mu \psi -
-\frac{1}{4} F_{\mu\nu}^a F^{a\mu\nu} - m \bar{\psi} \psi\label{eq1-1}
-\end{equation}
+Dalam pemodelan dengan ABM terdapat dua kategori, yaitu \textit{phenomena-based modeling} dan \textit{exploratory modeling}. \textit{Phenomena-based modeling} merupakan pendekatan atau pengembangan model yang dilakukan berdasar-kan pengamatan langsung fenomena alam yang terjadi dengan memiliki karakteristik pola tertentu (dikenal dengan \textit{reference pattern}), kemudian mencari agen-agen yang terbentuk, aturan-aturan untuk masing-masing agen sehingga menghasilkan suatu pola. \textit{Exploratory modeling} merupakan pengembangan model yang dilakukan dari pembuatan agen-agen, mendefinisikan perilaku agen dan mencari pola baru.
 
-\subsubsection{This is Third Level Heading}
+Dalam pemodelan dikenal dengan istilah desain \textit{top-down} dan \textit{bottom-up}. Di rancangan \textit{Top-down}, perancang model bekerja pada tingkatan agen-agen dalam model, lingkungan yang berlangsung, dan aturan interaksi terlebih dahulu sebelum membuat baris kode. Di rancangan \textit{bottom-up}, perancang dilakukan terlebih dahulu berupa baris-baris kode yang berhubungan dengan fenomena yang terjadi.
 
-The manifestation of solar activity (flares, bursts, and others) occurs over the whole Sun, and most of radio astronomy observations are made from the Earth's surface, whereas a significant part of solar radio events (those from the far side of the Sun) is not available for terrestrial observers.
-\begin{equation}
-\mathcal{L}\quad \mathbf{\mathcal{L}} = i \bar{\psi} \gamma^\mu D_\mu \psi -
-\frac{1}{4} F_{\mu\nu}^a F^{a\mu\nu} - m \bar{\psi} \psi\label{eq1-2}
-\end{equation}
+Sebelum melakukan pemodelan, ada beberapa karakteristik penting yang harus diperhatikan di ABM, yaitu:
 
-\paragraph{This is Fourth Level Heading}
+\subsubsection*{Aturan sederhana dapat digunakan untuk menghasilkan fenomena yang kompleks}
 
-\lipsum[5]
+Banyak model yang diketahui memiliki aturan sederhana dan tidak memerlukan persamaan matematika kompleks atau pemahaman yang dalam berkaitan bidang digeluti. Meskipun demikian, aturan sederhana tersebut dapat memunculkan (\textit{emergence}) suatu pola yang kompleks. Misalkan, aturan semut dalam mencari makanan. Setiap individu semut memiliki aturan sederhana dengan terus bergerak dengan tambahan menghadap secara acak dalam menemukan makanan. Apabila semut berhasil menemukan makan, masing-masing individu semut mengeluarkan suatu zat sebagai alat lacak untuk individu semut lainnya dalam menemukan lokasi makanan, kemudian makan tersebut dibawa ke sarang semut. Apabila dilihat dari aturan sederhana ini dari masing-masing individu semut, dapat membentuk suatu pola baru dan kompleks dari kawanan semut dalam mencari atau melacak makan.
 
-\begin{table}
-\caption{Enter table caption here.\label{tab1-1}}{%
-\begin{tabular}{@{}cccc@{}}
-\toprule
-Tap     &Relative   &Relative   &Relative mean\\
-number  &power (dB) &delay (ns) &power (dB)\\
-\midrule
-3 &0$-9.0$  &68,900\footnotemark[1] &$-12.8$\\
-4 &$-10.0$ &12,900\footnotemark[2] &$-10.0$\\
-5 &$-15.0$ &17,100 &$-25.2$\\
-\botrule
-\end{tabular}}{\footnotetext[]{Source: Example for table source text.}
-\footnotetext[1]{Example for a first table footnote. Example for a first table footnote. Example for a first table footnote. Example for a first table footnote.}
-\footnotetext[2]{Example for a second table footnote.}}
-\end{table}
+\subsubsection*{Ketakberaturan dalam masing-masing perilaku individu dapat menghasil-kan suatu pola yang konsisten dalam populasi}
 
-\subparagraph{This is Fifth Level Heading}
+Tidak terjadi suatu proses deterministik (yang ditentukan) dalam suatu kawanan dari masing-masing pergerakan individu burung. Masing-masing individu burung memiliki aturan terbang yang sederhana dan tidak ditentukan. Meskipun sifat alam terkandung suatu peluang, suatu perilaku dapat diprediksi dalam tingkatan yang lebih tinggi seperti pergerakan kawanan burung.
 
-\lipsum[6]
+\subsubsection*{Pola kompleks dapat terbentuk dari pengaturan mandiri tanpa ada yang memandu suatu perilaku}
 
-The manifestation of solar activity (flares, bursts, and others) occurs over the whole Sun, and most of radio astronomy observations are made from the Earth's surface, whereas a significant part of solar radio events (those from the far side of the Sun) is not available for terrestrial observers (Equation~\ref{eq1-2}).
+Pada umumnya, orang-orang menganggap bahwa pergerakan kawanan burung dikendalikan oleh satu pemimpin kawanan burung melalui instruksi ke mana atau pola apa yang harus diambil saat terbang. Akan tetapi, alam sangat mengejutkan, bahwa individu-individu dari kawanan burung mengikuti aturan yang sangat sederhana saat terbang dan mengatur secara mandiri masing-masing individu burung sehingga menghasilkan pola terbang yang kompleks dan indah dari kawanan burung tersebut tanpa adanya pengendali terpusat. Pola ini disebut \textit{emergent}.
 
-\begin{table}
-\caption{Enter table caption here.\label{tab1-2}}{%
-\begin{tabular}{@{}cccc@{}}
-\toprule
-Tap     &Relative   &Relative   &Relative mean\\
-number  &power (dB) &delay (ns) &power (dB)\\
-\midrule
-3 &0$-9.0$  &68,900\footnotemark[1] &$-12.8$\\
-4 &$-10.0$ &12,900\footnotemark[2] &$-10.0$\\
-5 &$-15.0$ &17,100 &$-25.2$\\
-\botrule
-\end{tabular}}{\footnotetext[]{Source: Example for table source text.}
-\footnotetext[1]{Example for a first table footnote. Example for a first table footnote. Example for a first table footnote. Example for a first table footnote.}
-\footnotetext[2]{Example for a second table footnote.}}
-\end{table}
+\subsubsection*{Beda model memberikan aspek berbeda dari dunia}
 
-\backmatter
+Setiap model mengedepankan aspek tertentu dari fenomena alam dan mengebelakangkan aspek lainnya. Ada banyak kemungkinan model yang dibuat untuk menceritakan bagaimana fenomena di dunia berlangsung. Sebagai contohnya, pemodelan semut mencari makan. Masing-masing semut mengikuti aturan sederhana dalam mencari makan tanpa dikomandoi secara terpusat. Walaupun, pemodelan semut ini berlangsung baik namun pemodelan ini belum menjelaskan ketika ada pemangsa lain ikut menemukan makan yang sama sehingga pemodelan tadi tidak memiliki informasi atau aspek luar seperti pemangsa lain.

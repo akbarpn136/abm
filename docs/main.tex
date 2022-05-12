@@ -1,49 +1,11 @@
-%% Run LaTeX on this file several times to get Table of Contents,
-%% cross-references, and citations.
-
-\documentclass[12pt]{book}
-\usepackage{WileyAuthoringTemplate}
-\usepackage{chapterbib}
-\usepackage[sectionbib,authoryear]{natbib}% for name-date citation comment the below line
-%\usepackage[sectionbib,numbers]{natbib}% for numbered citation comment the above line
-%\usepackage{lettrine}
-
-%%********************************************************************%%
-%%       The below macro controls the numbering of section heads      %%
-%% 0= no section numbers, 1= section, 2= subsection, 3= subsubsection %%
-\setcounter{secnumdepth}{3}
-%%********************************************************************%%
-
-%%**********************************************************************%%
-%%  The below macro controls the number of section heads displayed in   %%
-%%			Table of Contents?				%%
-%% 0= chapter, 1= section, 2= subsection, 3= subsubsection titles.	%%
-\setcounter{tocdepth}{2}
-%%**********************************************************************%%
-
-%%\includeonly{fm}
-
-\makeindex% for index generation
+\input{sections/cover}
 
 \begin{document}
+	\maketitle
 
-\frontmatter
-\include{sections/cover}
+	\include{sections/ch01}
+	\include{sections/ch02}
 
-\mainmatter
-
-\include{sections/ch01}
-\include{sections/ch02}
-\include{sections/ch03}
-\include{sections/ch04}
-\include{sections/ch05}
-
-\backmatter
-\include{app01}
-\include{app02}
-
-\printindex
-\bibliographystyle{plainnat}
-\bibliography{wiley}
-
+	\renewcommand\refname{Referensi}
+	\bibliography{pustaka}
 \end{document}
