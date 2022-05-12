@@ -1,9 +1,79 @@
 \section{Studi Pemilihan Pemimpin di ABM}
 
-\lettrine{M}{etode} ABM sangat ampuh digunakan dalam memodelkan permasalahan sehari-hari karena dapat memodelkan masalaah tanpa melibatkan banyak proses matematika yang rumit \cite{crooks2018agent}. Pemilihan pemim-pin menjadi salah satu contoh masalah yang dapat dimodelkan di ABM. Munculnya sistem pemerintahan yang demokrasi membawa semakin banyak pihak yang terlibat dalam proses pembuatan keputusan dan memperbanyak variabel dalam menghitung peluang para calon untuk dapat memenangkan pemilihan \cite{feddersen2004rational}, terutama perilaku setiap orang dan interaksi didalamnya sangat berpengaruh terhadap hasil dari pemilihan. Banyak penelitian dilakukan untuk masalah pemilihan (voting) ini \cite{feddersen2004rational,saaty1989group}. Dalam skala kecil, masalah voting bisa hanya permasalahan membagi sekelompok murid ke dalam dua tim yaitu  merah dan biru, tetapi dalam masalah yang lebih besar dapat dikaitkan pada pemilihan presiden atau pemilihan pemimpin serikat negara. Kasus pemilihan pemimpin ini dapat diselesaikan menggunakan ABM dimana para pelaku pemilih dipandang sebagai agen-agen yang berperan didalamnya. Background dari agen dan cara berinteraksi dapat dijadikan sebagai dasar  dari aturan interaksi dalam membangun model dari pemilihan \cite{kazil2020utilizing}.
+\lettrine[nindent=-0.01em,findent=0.2em]{M}{etode} ABM sangat ampuh digunakan dalam memodelkan permasalahan sehari-hari karena dapat memodelkan masalaah tanpa melibatkan banyak proses matematika yang rumit \cite{crooks2018agent}. Pemilihan pemim-pin menjadi salah satu contoh masalah yang dapat dimodelkan di ABM. Munculnya sistem pemerintahan yang demokrasi membawa semakin banyak pihak yang terlibat dalam proses pembuatan keputusan dan memperbanyak variabel dalam menghitung peluang para calon untuk dapat memenangkan pemilihan \cite{feddersen2004rational}, terutama perilaku setiap orang dan interaksi didalamnya sangat berpengaruh terhadap hasil dari pemilihan. Banyak penelitian dilakukan untuk masalah pemilihan (voting) ini \cite{feddersen2004rational,saaty1989group}. Dalam skala kecil, masalah voting bisa hanya permasalahan membagi sekelompok murid ke dalam dua tim yaitu  merah dan biru, tetapi dalam masalah yang lebih besar dapat dikaitkan pada pemilihan presiden atau pemilihan pemimpin serikat negara. Kasus pemilihan pemimpin ini dapat diselesaikan menggunakan ABM dimana para pelaku pemilih dipandang sebagai agen-agen yang berperan didalamnya. Background dari agen dan cara berinteraksi dapat dijadikan sebagai dasar  dari aturan interaksi dalam membangun model dari pemilihan \cite{kazil2020utilizing}.
 
 Banyak hal yang mempengaruhi setiap individu dalam melakukan pemilihan atau bahkan memilih untuk tidak memilih. Dalam artikel \cite{olson2012logic} terdapat konsep rasionalitas instrumental, yang menurutnya individu rasional membuat pilihan yang mereka yakini akan membawa hasil yang paling mereka sukai, Olson berpendapat bahwa ada sedikit insentif rasional bagi individu untuk berkontribusi pada produksi barang publik (atau umum), mengingat mereka (para calon) yang mengeluarkan biaya, para pemilih akan tetap memperoleh benefit terlepas dari ikut berkontribusi (suara) atau tidak \cite{savigny_2014}. Pandangan ini meningkatkan jumlah pemilih yang memilih untuk tidak memilih (golput) pada acara pemilihan.
 
 Pada tahun 2019, di Indonesia melakukan pemilihan umum baik legislative maupun presiden. Menurut tim Lembaga Survey Indonesia (LSI), mereka menyatakan bahwa jumlah golput untuk pemilihan presiden di tahun 2019 yaitu sekitar 19.24\% yang telah menurun dibandingkat Pilpresa sebelumnya di tahun 2014 yang mencapai 30.42\% \cite{bbc_2019}. Presentase tersebut sangatlah tinggi sehingga banyak usaha yang dilakukan untuk meningkatkan minat pemilih untuk ikut berpartisipasi melalui berbagai cara, baik itu melalui hadiah dan promo bagi yang telah melakukan kewajibannya untuk memilih hingga ancaman bila tidak berpartisipasi.
 
 Melakukan pemilihan sebenarnya adalah reaksi rasional dari setiap individu \cite{feddersen2004rational}. Salah satu hal yang banyak dilakukan adalah dengan menempatkan aktor-aktor strategis yang dapat mengarahkan pemikiran secara rasional dari individu untuk melakukan pemilihan. Dalam pemilihan pendahuluan, ada bukti bahwa pemilih mengkondisikan pilihan suara mereka pada kelayakan kandidat \cite{abramson1992sophisticated}. Dalam sebuah studi komprehensif, penulis \cite{cox1997making} menunjukkan bahwa pola pemungutan suara dan hasil pemilu secara umum konsisten dengan pola perilaku yang diprediksikan oleh model voting strategis, misalnya di bawah aturan pluralitas (di mana kandidat dengan suara terbanyak memenangkan pemilihan).
+
+Agen-agen strategis yang diterapkan pada penelitian ini adalah agen bayaran. Dalam hal ini, agen bayaran akan bertugas untuk mempengaruhi agen lain untuk mengikuti pilihan dari agen bayaran tersebut. Sehingga secara rasional para agen pemilih mengalami kenaikkan kecenderungan untuk mengikuti agen pemilih bayaran memilih pilihan. Model ini akan memperlihatkan bagaimana jumlah pemilih bayaran dapat berpengaruh dan bagaimana sekelompok kecil pemilih bayaran bila berada di posisi yang tepat akan mempercepat agen-agen pemilih untuk menentukan pilihannya.
+
+Model pemilihan umum telah banyak diteliti baik di Indonesia maupun di dunia \cite{abramson1992sophisticated,cox1997making,wijayati2020money}. Untuk membangun model agen bayaran dalam pemilihan umum pemimpin, dimulai dengan model sederhana yaitu model voting yang terdapat pada NetLogo \cite{wilensky1999netlogo}, lalu model standing ovation yang dikembangkan oleh Miller dan Page \cite{miller2004standing}, dan seiring dengan meningkatnya komputasi untuk melakukan pemodelan, muncul MESA yang dikembangkan dengan bahasa Python \cite{kazil2020utilizing}. Model ini diharapkan dapat menggambarkan situasi pemilihan umum dengan banyak faktor yang mempengaruhi perilaku para pemilih. Salah satu yang akan ditekankan pada model ini adalah perilaku pemilih yang bergerak karena adanya aktor-aktor strategis yang menjadi gambaran seorang agen bayaran yang selanjutnya akan meningkatkan jumlah suara pemilih dan mempengaruhi hasil akhir dari pemilihan.
+
+\subsection{Model Voting dari modul library NetLogo}
+
+Untuk model pemilihan sebagai model paling sederhana dapat dilihat pada model voting yang disediakan oleh modul libraries Netlogo dan juga model standing ovation yang telah dikembangkan. Pada model voting, opini para agen akan terlihat dengan bagaimana setiap agen menentukan pilihannya berdasarkan observasi terhadap neighbours atau sekitarnya. Menurut penulis \cite{viridi2019agent} agen menempati satu sel grid yang lalu bergerak mengikuti pola yang ditetapkan.
+
+Untuk memahami kestabilan suatu grup, model perlu diperbesar untuk mengurangi cluster dan  dan memahami konfigurasi saat dia stabil. Sebagai contoh, saat suatu sel dikelilingi (4 biru dan 4 hijau) disekitarnya maka posisi sel tersebut tidak akan berubah lagi. Meski demikian, hal ini tidak mudah bagi kita untuk memprediksi initial set dari suatu sel dan dimana batasnya hingga akhirnya kestabilan tercapai.
+
+Sebagai gambaran, pemilih ditentukan di awal adalah jumlah pemilih warna hijau.
+
+\begin{equation}
+	InitialGreenVoter = CountPatches \times \frac{InitialGreen}{100}
+\end{equation}
+
+\texttt{InitialGreenVoter} dapat dikatakan merepresentasikan estimasi dari jumlah keberpihakan suatu kelompok di lingkungan dan jumlah tick menggambarkan waktu yang menunjukkan bagaimana perkembangan keberpihakan dari setiap patch menurut waktu seperti Gambar \ref{fig:initvoter} berikut.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch02/InitVoter}
+	\caption{Simulasi voting NetLogo}
+	\label{fig:initvoter}
+\end{figure}
+
+\subsubsection{Aturan sederhana pada model voting}
+
+Pada model ini terdapat basic rules diantaranya sebagai berikut:
+
+\begin{itemize}
+	\item Bila neighbours menunjukkan jumlah opini seri, maka sel akan tetap pada pilihan terakhir dan tidak berubah lagi seterusnya
+
+	\item Agen akan selalu mengikuti pilihan dari mayoritas dari agen-agen disekitarnya
+\end{itemize}
+
+Pada model awal, jumlah initial patch green menentukan, artinya bila suatu kelompok sudah memiliki kecenderungan, kemungkinan komunitas akan mengikuti. Pada gambar di bawah, proporsi hijau diatur 50\% di awal, berkat ada interaksi antar agen jumlah akhir pemenangnya adalah biru dengan selisih yang tidak terlalu besar.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch02/Voter2}
+	\caption{Interaksi antar agen pemilih}
+	\label{fig:voter2}
+\end{figure}
+
+\subsubsection{Modifikasi model}
+
+\textbf{Change vote if tied}. Aturan default dari model ini adalah bila neighbours menunjukkan jumlah opini seri, maka sel akan tetap pada pilihan terakhir dan tidak berubah lagi seterusnya.
+
+Opsi ini dapat merubah rule: bila seri, maka sel akan berubah. Hal ini membuat ketidakstabilan  dalam system yang menghasilkan noisy pada kesetimbangan. Hasilnya para agen tidak akan pernah berhenti bahkan saat sudah mencapai kestabilan global. Meski demikian, secara umum opsi ini tidak akan merubah skor dari distribusi opini, tetapi akan mengakibatkan beberapa agen merubah opini mereka secara terus menurus pada konfigurasi ini. Hasil simulasi pada modifikasi ini dapat dilihat dalam Gambar \ref{fig:voter3}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch02/Voter3}
+	\caption{Perubahan konfigurasi untuk pemilihan seri}
+	\label{fig:voter3}
+\end{figure}
+
+\textbf{Award close calls to loser}. Konfigurasi dasar model ini adalah agen akan selalu mengikuti pilihan dari mayoritas dari agen-agen disekitarnya. Opsi ini meminta agen untuk memilih posisi minoritas secara sistemik. Dengan ini, hasil dari pemilihan bisa diluar ekspektasi. Dapat dibayangkan suatu society yang dipenuhi oleh agen-agen kontradiktif yang secara constant selalu berusaha merubah hasil. Lalu saat kesetimbangan sulit tercapai, dan minority tidak dapat mengubah pilihannya, system akan terus-menerus berubah menjadi satu warna dengan beberapa gelembung minoritas yang kecil didalamnya lalu menghadirkan ketidakstabilan yang tinggi.
+
+Namun, untuk memperoleh hasil konstan seperti ini memerlukan waktu yang cukup lama. Kedua jenis agen ini dapat hidup bersama dalam jangka waktu yang cukup lama. Terkadang kelas yang kalah kembali menyamakan kedudukan dengan yang menang, terkadang dia terus berisolaso antara 8000-9000 melawan mayoritas 13000-12000.
+
+Hal yang dapat dipahami dari Gambar \ref{fig:voter4} adalah bahwa dalam komunitas masyarakat demokrasi, hasil pemungutan suara pada saat-saat tertentu dapat berubah dan tidak terduga dan tidak dapat dikatakan menjadi dasar sebagai perkiraan hasil pada pemungutan suara yang lain.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch02/Voter4}
+	\caption{Perubahan bertahap selama voting}
+	\label{fig:voter4}
+\end{figure}
