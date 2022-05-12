@@ -80,7 +80,7 @@
 \parskip0pc
 \RequirePackage[labelfont={bf,sf},%
                 labelsep=period,%
-                figurename=Fig.,%
+                figurename=Gambar,%
                 singlelinecheck=off,%
                 justification=RaggedRight]{caption}
 
