@@ -78,6 +78,7 @@
 \RequirePackage[nohead,left=1.625in,right=1.625in,top=1in,bottom=1in,headheight=15pt,headsep=\dimexpr1.3in-48pt-15pt\relax]{geometry}
 \parindent1em %% em tied to font
 \parskip0pc
+\RequirePackage{subfig}
 \RequirePackage[labelfont={bf,sf},%
                 labelsep=period,%
                 figurename=Gambar,%
