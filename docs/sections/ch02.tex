@@ -77,3 +77,92 @@ Hal yang dapat dipahami dari Gambar \ref{fig:voter4} adalah bahwa dalam komunita
 	\caption{Perubahan bertahap selama voting}
 	\label{fig:voter4}
 \end{figure}
+
+Setelah 90.000 iterasi model masih belum mencapai titik kesetimbangan. Walaupun dapat diramalkan bahwa model akan berakhir dimenangkan oleh patch biru dan terdapat beberapa titik-titik hijau.
+
+Pada konsep pemilihan umum dengan pemilih bayaran yang akan dikembangkan, para agen netral akan digiring oleh agen-agen bayaran yang ditempatkan untuk membuat pilihan mengikuti pilihan dari agen bayaran. Bagaimana perilaku dari agen dapat terpengaruh oleh agen lain, dapat dilihat pada bagian model standing ovation berikut.
+
+\subsection{Model Standing Ovation}
+
+Model standing ovation pertama kali dikenalkan oleh Miller dan Page (2004) dengan mengilustrasikan masalah pengambilan keputusan, yaitu bagaimana para penonton pada akhirnya akan ikut berdiri dan bertepuk tangan. Pada situasi tersebut, setiap penonton perlu memutuskan apa dia akan ikut berdiri atau tetap duduk diam. Tetapi, hal tersebut akan berubah bilamana dia dikekelingi oleh orang-orang yang berdiri dan bertepuk tangan. Hal ini terjadi secara alami untuk menghindari perasaan tidak nyaman karena berbeda dengan orang lain. Sama halnya dengan tidak mungkin seseorang merasa nyaman berdiri dan bertepuk tangan di saat semua orang duduk terdiam.
+
+Pada model Miller dan Page, Terdapat sebuah auditorium berukuran $L \times L$ yang sesak dipenuhi oleh agen. Di akhir pertunjukkan, penonton akan mengevaluasi pertunjukkan berdasarkan dari jumlah tepuk tangan. Nilai persepsi dari agen $i$ merupakan nilai floating poin acak $\left( 0.1 \right) $ yang disebut $qi$ dan model ini ditentukan nilai batas sebesar $\left( 0.5 \right)$ apabila $qi > 0.5$.
+
+Pada langkah selanjutnya, agen akan meninjau sekelilingnya jika sekelilingnya menunjukkan perilaku yang berbeda maka agen dapat merubah keputusannya. Model Miller dan page membuat dua jenis environment yaitu lima tetangga dan kerucut.
+
+\begin{itemize}
+	\item Pada skenario lima tetangga, agen akan memperhatikan agen yang berada di samping kanan, kiri, depan, dan belakang seperti Table \ref{tbl:formasi_sop}.
+
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			F & \cellcolor{gray!30}F & F \\
+			\hline
+			\cellcolor{gray!30}F & \cellcolor{gray!50}X & \cellcolor{gray!30}F \\
+			\hline
+			F & \cellcolor{gray!30}F & F \\
+			\hline
+		\end{tabular}
+		\caption{Formasi lima tetangga}
+		\label{tbl:formasi_sop}
+	\end{table}
+
+	\item Pada skenario kerucut, agen akan melihat agen lain di sisi kanan dan kirinya, lalu tiga agen di baris pertama depan dan lima agen di baris kedua depan dan seterusnya seperti Tabel \ref{tbl:formasi_kerucut}.
+
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F \\
+			\hline
+			F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & F \\
+			\hline
+			F & F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & F & F \\
+			\hline
+			F & F & \cellcolor{gray!30}F & \cellcolor{gray!50}X & \cellcolor{gray!30}F & F & F \\
+			\hline
+		\end{tabular}
+		\caption{Formasi kerucut}
+		\label{tbl:formasi_kerucut}
+	\end{table}
+\end{itemize}
+
+\subsubsection{Aturan pada model standing ovation}
+Ada aturan yang diterapkan di model standing ovation, yaitu:
+\begin{enumerate}
+	\item \textbf{Synchronous updating} (SU) :Semua agen memperbaharui statusnya secara bersamaan di waktu yang sama.
+
+	\item \textbf{Asyncronous-random updating} (ARU): Pada setiap waktu setiap agen mereview mereka dengan urutan random
+\end{enumerate}
+
+\subsubsection{Penerapan model standing ovation di NetLogo}
+
+Pada model lima tetangga dapat dilakukan dengan  menggunakan model kerucut dengan panjang barisan 1. Pada kasus selanjutnya misalkan untuk $L=20$ (terdapat 20 baris penonton), maka model kerucut dapat diimplementasikan hingga $n=18$.
+
+
+\begin{itemize}
+	\item Skenario 1 – lima tetangga - synchronous updating
+
+	Lima tetangga dengan nilai $cone-length=1$, $noise=0$, $intrinsic-proc-standing=0.42$, $updating=synchronous updating$ dan pengaturan yang dipilih Make guy stand up. Berikut akan diperlihatkan apa yang dilihat oleh agen.
+
+	\begin{figure}[H]
+		\centering
+		\subfloat[Kondisi awal]{
+			\label{sfig:sop1}
+			\includegraphics[width=0.3\linewidth]{images/ch02/sop1}
+		}\hfill
+		\subfloat[Saat $t=1$]{
+			\label{sfig:sop2}
+			\includegraphics[width=0.3\linewidth]{images/ch02/sop2}
+		}\hfill
+		\subfloat[Saat $t=10$]{
+			\label{sfig:sop3}
+			\includegraphics[width=0.3\linewidth]{images/ch02/sop3}
+		}\hfill
+		\caption{Proses iterasi standing ovation di NetLogo}
+		\label{fig:proses_sop}
+	\end{figure}
+
+	Pada running saat $t=27$ diperoleh dengan tidak ada seorangpun yang berdiri dengan $t$ menyatakan jumlah iterasi. Pada model ini, setiap agen bergerak mengikuti perubahan yang terjadi di sekitarnya.
+\end{itemize}
