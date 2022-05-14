@@ -23,6 +23,7 @@ class AgenBayaran(Model):
             pengeluaran_uang=50,
             initial_agen_bayaran=10,
             initial_pemilih=100,
+            initial_tipe_tetangga="Moore"
     ):
         super().__init__()
 
@@ -34,6 +35,7 @@ class AgenBayaran(Model):
         self.initial_uang = initial_uang
         self.initial_agen_bayaran = initial_agen_bayaran
         self.initial_pemilih = initial_pemilih
+        self.initial_tipe_tetangga = initial_tipe_tetangga
 
         self.schedule = RandomActivation(self)
         self.grid = MultiGrid(self.width, self.height, torus=True)
@@ -59,8 +61,9 @@ class AgenBayaran(Model):
             x = self.random.randrange(self.width)
             y = self.random.randrange(self.height)
 
+            tipe_tetangga = self.initial_tipe_tetangga == "Moore"
             keinginan = self.random.uniform(0, 1)
-            pemilih = Pemilih(self.next_id(), (x, y), self, True, keinginan)
+            pemilih = Pemilih(self.next_id(), (x, y), self, tipe_tetangga, keinginan)
             self.grid.place_agent(pemilih, (x, y))
             self.schedule.add(pemilih)
 
