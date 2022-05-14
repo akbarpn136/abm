@@ -79,15 +79,15 @@ Ada aturan sederhana yang diterapkan di model standing ovation, yaitu:
 	\item \textbf{Asyncronous-random updating} (ARU): Pada setiap waktu setiap agen mereview mereka dengan urutan random
 \end{enumerate}
 
-\subsection{Model Pemilihan Umum SOP dengan menggunakan NetLogo}
+\subsection{Model Pemilihan Umum SOP dengan menggunakan NetLogo}\label{sec:sbab_c}
 
 Model pemilihan umum di SOP dapat dibagi menjadi dua bagian, sebagai berikut:
 
 \subsubsection{Model Sederhana}
 
-Pada tahap ini, pemodelan perilaku pemilih dalam pemilu dengan menggunakan pendekatan SOP (Standing Ovation Problem) akan dilakukan. Dalam pemodelan ini, digunakan asumsi sistem pemilihan umum bersifat terbuka dan perasaan (threshold) dari setiap pemilih serta perilaku pemilih lainnya akan mempengaruhi perilaku seorang pemilih.
+Pada tahap ini, pemodelan perilaku pemilih dalam pemilu dengan menggunakan pendekatan SOP (Standing Ovation Problem) akan dilakukan. Dalam pemodelan ini, digunakan asumsi sistem pemilihan umum bersifat terbuka dan perasaan (\textit{threshold}) dari setiap pemilih serta perilaku pemilih lainnya akan mempengaruhi perilaku seorang pemilih.
 
-Dengan menggunakan pendekatan bottom-up, kita akan membuat model yang sederhana yang mewakili entitas utama dalam sebuah pemilihan umum, yaitu Pemilih, kualitas kampanye serta variable lain yang bisa mempengaruhi keputusan pemilih. Agen yang digunakan dalam model ini hanya satu yaitu Pemilih sedangkan environment yang digunakan bersifat statis dan tidak mempunyai interaksi dengan dengan agent maupun dengan environment lainnya.
+Dengan menggunakan pendekatan bottom-up, model dibuat sederhana yang mewakili entitas utama dalam sebuah pemilihan umum, yaitu Pemilih, kualitas kampanye serta variable lain yang bisa mempengaruhi keputusan pemilih. Agen yang digunakan dalam model ini hanya satu yaitu Pemilih sedangkan environment yang digunakan bersifat statis dan tidak mempunyai interaksi dengan dengan agent maupun dengan environment lainnya.
 
 Agen mempunyai interaksi dengan agen lainnya dan dapat berubah perilakunya berdasarkan kriteria dari parameter yang ditentukan.
 
@@ -98,7 +98,7 @@ Agen juga mempunyai rules lainnya, yaitu agen akan Standing untuk memilih apabil
 Keputusan seorang pemilih untuk Standing (memilih) dapat di formulasikan Persamaan \ref{eq:sop1}:
 
 \begin{equation}
-Q_{campaign} + noise \geqslant threshold
+Q_{campaign} + noise \approx threshold
 \label{eq:sop1}
 \end{equation}
 
@@ -157,4 +157,27 @@ Dalam model kompleks, ada beberapa tambahan parameter sebagai berikut:
 
 \subsection{Model Pemilihan Umum SOP dengan menggunakan Python Mesa}
 
-Pada dasarnya terdapat kesamaan antara pemodelan pemilihan umum SOP di \texttt{NetLogo} dengan yang dilakukan dengan \texttt{Mesa}.
+Pada dasarnya terdapat kesamaan antara pemodelan pemilihan umum SOP di \texttt{NetLogo} dengan yang dilakukan di \texttt{Mesa}. Dalam pemodelan ini, Terdapat dua kategori umum agen yaitu:
+
+\begin{enumerate}
+\item \textbf{Agen bayaran} merupakan individu atau dapat berupa sekelompok orang yang memiliki fungsi membagikan uang atau insentif kepada calon pemilih.
+
+\item \textbf{Agen pemilih} merupakan sekelompok calon pemilih yang memiliki fungsi memilih calon pemimpin. Agen ini memiliki tiga kondisi yaitu \texttt{yakin memilih}, \texttt{ragu-ragu}, dan \texttt{yakin tidak memilih}. Memang pada dasarnya di model SOP, luaran dari model bersifat biner yaitu apakah 1 (\textit{standing}) atau 0 (\textit{sitdown}). Namun dalam artikel ini, nilai diantaranya dimasukkan untuk melihat perubahan yang akan terjadi pada keragu-raguan. Dalam pemodelan ini, tingkat keyakinan dalam pemilihan ditentukan dari nilai batas atau \textit{threshold}.
+\end{enumerate}
+
+Dalam penerapan model pemilihan umum dengan SOP, ada beberapa faktor yang mempengaruhi seperti yang sudah dijelaskan pada sub-bab \ref{sec:sbab_c} yaitu peforma atau kualitas kampanye calon pemimpin, \textit{noise} atau faktor internal yang tidak terduga, dan uang atau insentif. Ketiga faktor yang disebutkan dapat mempengaruhi secara umum keinginan atau \textit{threshold} calon pemilih untuk memilih calon pemimpin. Dengan demikian, pemodelan ini di \texttt{Mesa} menggunakan formula dibawah.
+
+\begin{equation}
+Q_{campaign} + noise \times insentive \approx threshold
+\label{eq:sop_mesa}
+\end{equation}
+
+Berdasarkan Persamaan \ref{eq:sop_mesa} di atas dapat dijelaskan faktor yang dapat mempengaruhi sebagai berikut:
+
+\begin{itemize}
+\item Kualitas atau performa kampanye ($Q_{campaign}$) dari calon pemimpin merupakan faktor utama dalam pemodelan ini. Faktor ini sangat menentukan calon pemilih untuk menentukan sikap apakah ikut memilih (\textit{standing}), ragu-ragu, atau tidak memilih (\textit{sitdown}).
+
+\item Noise diperlukan dalam pemodelan ini sebagai faktor internal yang dapat terjadi tanpa diduga. Apabila faktor ini sedang baik bagi calon pemilih maka noise bernilai positif, begitu juga sebaliknya noise akan bernilai negatif. Faktor ini dapat berupa kesehatan calon pemilih, tingkat kebahagiaan, atau lainnya.
+
+\item Insentive atau uang menjadi faktor dalam studi kasus pemilihan umum dengan SOP ini. Uang diterima oleh pemilih melalui pemberian agen bayaran saat agen-agen tersebut bertemu. Uang yang diberikan oleh agen bayaran kemudian dikategorikan ke dalam tiga kelompok oleh calon pemilih yaitu \texttt{kecil}, \texttt{sedang}, atau \texttt{besar}.
+\end{itemize}
