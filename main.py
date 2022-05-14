@@ -62,6 +62,9 @@ if __name__ == "__main__":
         "initial_pemilih": UserSettableParameter(
             "slider", "Jumlah pemilih", 100, 50, 350
         ),
+        "initial_tipe_tetangga": UserSettableParameter(
+            "choice", "Tipe Tetangga", value="Moore", choices=("Moore", "Von Neumann")
+        ),
         "radius_pembanding": UserSettableParameter(
             "slider", "Radius pengamatan pemilih", 2, 1, 4
         ),
