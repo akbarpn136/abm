@@ -28,7 +28,7 @@ Sebagai gambaran, pemilih ditentukan di awal adalah jumlah pemilih warna hijau.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{images/ch02/InitVoter}
+	\includegraphics[width=\linewidth]{images/ch03/InitVoter}
 	\caption{Simulasi voting NetLogo}
 	\label{fig:initvoter}
 \end{figure}
@@ -47,7 +47,7 @@ Pada model awal, jumlah initial patch green menentukan, artinya bila suatu kelom
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{images/ch02/Voter2}
+	\includegraphics[width=\linewidth]{images/ch03/Voter2}
 	\caption{Interaksi antar agen pemilih}
 	\label{fig:voter2}
 \end{figure}
@@ -60,7 +60,7 @@ Opsi ini dapat merubah rule: bila seri, maka sel akan berubah. Hal ini membuat k
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{images/ch02/Voter3}
+	\includegraphics[width=\linewidth]{images/ch03/Voter3}
 	\caption{Perubahan konfigurasi untuk pemilihan seri}
 	\label{fig:voter3}
 \end{figure}
@@ -73,7 +73,7 @@ Hal yang dapat dipahami dari Gambar \ref{fig:voter4} adalah bahwa dalam komunita
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{images/ch02/Voter4}
+	\includegraphics[width=\linewidth]{images/ch03/Voter4}
 	\caption{Perubahan bertahap selama voting}
 	\label{fig:voter4}
 \end{figure}
@@ -144,25 +144,127 @@ Pada model lima tetangga dapat dilakukan dengan  menggunakan model kerucut deng
 \begin{itemize}
 	\item Skenario 1 – lima tetangga - synchronous updating
 
-	Lima tetangga dengan nilai $cone-length=1$, $noise=0$, $intrinsic-proc-standing=0.42$, $updating=synchronous updating$ dan pengaturan yang dipilih Make guy stand up. Berikut akan diperlihatkan apa yang dilihat oleh agen.
+	Lima tetangga dengan nilai $cone-length=1$, $noise=0$, $intrinsic-proc-standing=0.42$, $updating=synchronous updating$ dan pengaturan yang dipilih \texttt{Make guy stand up}. Berikut akan diperlihatkan apa yang dilihat oleh agen.
 
 	\begin{figure}[H]
 		\centering
 		\subfloat[Kondisi awal]{
 			\label{sfig:sop1}
-			\includegraphics[width=0.3\linewidth]{images/ch02/sop1}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop1}
 		}\hfill
 		\subfloat[Saat $t=1$]{
 			\label{sfig:sop2}
-			\includegraphics[width=0.3\linewidth]{images/ch02/sop2}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop2}
 		}\hfill
 		\subfloat[Saat $t=10$]{
 			\label{sfig:sop3}
-			\includegraphics[width=0.3\linewidth]{images/ch02/sop3}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop3}
 		}\hfill
 		\caption{Proses iterasi standing ovation di NetLogo}
 		\label{fig:proses_sop}
 	\end{figure}
 
-	Pada running saat $t=27$ diperoleh dengan tidak ada seorangpun yang berdiri dengan $t$ menyatakan jumlah iterasi. Pada model ini, setiap agen bergerak mengikuti perubahan yang terjadi di sekitarnya.
+	Pada saat $t=27$ diperoleh dengan tidak ada seorangpun yang berdiri dengan $t$ menyatakan jumlah iterasi. Pada model ini, setiap agen bergerak mengikuti perubahan yang terjadi di sekitarnya.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch03/sop4}
+	\caption{Hasil simulasi saat $t=27$}
+	\label{fig:sop4}
+	\end{figure}
+
+	\item Skenario 1 – lima tetangga - asynchronous updating
+
+	Lima tetangga dengan nilai $cone-length=1$, $noise=0$, $intrinsic-proc-standing=0.42$, $updating=asynchronous updating$ dan pengaturan yang dipilih \texttt{Make guy stand up}. Berikut akan diperlihatkan apa yang dilihat oleh agen.
+
+	\begin{figure}[H]
+		\centering
+		\subfloat[Kondisi awal]{
+			\label{sfig:sop4}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop5}
+		}\hfill
+		\subfloat[Saat $t=1$]{
+			\label{sfig:sop5}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop6}
+		}\hfill
+		\subfloat[Saat $t=10$]{
+			\label{sfig:sop6}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop7}
+		}\hfill
+		\caption{Proses iterasi standing ovation asynchronous updating di NetLogo}
+		\label{fig:proses_sop_async}
+	\end{figure}
+
+	Pada skenario ini di iterasi $t=36$ agen masih belum konvergen dikarenakan agen secara random memperhatikan sekitarnya. Bisa dikatakan pada situasi ini seolah penonton terbagi di dua kelompok.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch03/sop8}
+	\caption{Hasil simulasi saat $t=36$}
+	\label{fig:sop8}
+	\end{figure}
+
+	\item Skenario 2- Lingkungan kerucut - synchronous updating
+
+	Kerucut dengan nilai $cone-length=18$, $noise=0.5$, $intrinsic-proc-standing=0.5$, $updating= synchronous updating$ dan pengaturan yang dipilih \texttt{Make guy stand up}. Berikut akan diperlihatkan apa yang dilihat oleh agen.
+
+	\begin{figure}[H]
+		\centering
+		\subfloat[Kondisi awal]{
+			\label{sfig:sop7}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop9}
+		}\hfill
+		\subfloat[Saat $t=1$]{
+			\label{sfig:sop8}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop10}
+		}\hfill
+		\subfloat[Saat $t=10$]{
+			\label{sfig:sop9}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop11}
+		}\hfill
+		\caption{Proses iterasi standing ovation kerucut synchronous updating di NetLogo}
+		\label{fig:proses_sop_kerucut_sync}
+	\end{figure}
+
+	Pada skenario ini, di iterasi $t=36$ agen masih belum konvergen dikarenakan pada kerucut jumlah pengaruh yang diterima setiap agen lebih tinggi. Pada perubahan setiap agen pada tiap waktu secara bersamaan, perubahan akan lebih mudah terprediksi karena sangat bergantung terhadap kondisi awal. Pada skenario 2, noise diaktifkan untuk memberikan perubahan dinamik pada model lebih signifikan. Noise juga membantu agar sistem tidak terkunci pada suatu state.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch03/sop12}
+	\caption{Hasil simulasi saat $t=36$}
+	\label{fig:sop12}
+	\end{figure}
+
+	\item Skenario 2- Lingkungan kerucut - asynchronous updating
+
+	Kerucut dengan nilai $cone-length=18$, $noise=0.5$, $intrinsic-proc-standing=0.5$, $updating=synchronous updating$ dan pengaturan yang dipilih \texttt{Make guy stand up}. Berikut akan diperlihatkan apa yang dilihat oleh agen.
+
+	\begin{figure}[H]
+		\centering
+		\subfloat[Kondisi awal]{
+			\label{sfig:sop10}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop13}
+		}\hfill
+		\subfloat[Saat $t=1$]{
+			\label{sfig:sop11}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop14}
+		}\hfill
+		\subfloat[Saat $t=10$]{
+			\label{sfig:sop12}
+			\includegraphics[width=0.3\linewidth]{images/ch03/sop15}
+		}\hfill
+		\caption{Proses iterasi standing ovation kerucut asynchronous updating di NetLogo}
+		\label{fig:proses_sop_kerucut_async}
+	\end{figure}
+
+	Pada skenario ini, di iterasi $t=36$ agen masih belum konvergen dikarenakan pada kerucut jumlah pengaruh yang diterima setiap agen lebih tinggi. Karena setiap agen berubah secara random pada waktu yang berbeda. Maka, terdapat keterkaitan yang lebih rumit. Perubahan pada agen di baris $n+1$ tergantung pada perubahan agen di baris $n$.
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/ch03/sop16}
+	\caption{Hasil simulasi saat $t=36$}
+	\label{fig:sop13}
+	\end{figure}
 \end{itemize}
+
+Dalam kaitannya dengan pemilih bayaran, model standing ovation dapat dijadikan rujukan untuk menunjukkan bahwa individu dapat merubah keputusannya akibat ada perubahan di sekelilingnya dan noises memberikan state lebih dinamis.
