@@ -118,7 +118,7 @@
 % Table style
 \arrayrulecolor{color2} % Set the color of the horizontal rules
 \renewcommand{\arraystretch}{1.5} % Increased line spacing
-\captionsetup[table]{position=below} % Reduce spacing below caption
+\captionsetup[table]{position=below,justification=centering} % Reduce spacing below caption
 
 % Algorithm style
 % \makeatletter
