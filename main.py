@@ -62,6 +62,9 @@ if __name__ == "__main__":
         "initial_pemilih": UserSettableParameter(
             "slider", "Jumlah pemilih", 100, 50, 350
         ),
+        "initial_tipe_pemilih": UserSettableParameter(
+            "choice", "Tipe Pemilih", value="Homogen", choices=("Homogen", "Heterogen")
+        ),
         "initial_tipe_tetangga": UserSettableParameter(
             "choice", "Tipe Tetangga", value="Moore", choices=("Moore", "Von Neumann")
         ),
