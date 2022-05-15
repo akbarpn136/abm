@@ -131,6 +131,7 @@
 
 \floatstyle{coloruled}
 \restylefloat{algorithm}
+\renewcommand{\ALG@name}{Algoritma}
 
 % Headers and footers
 \RequirePackage{fancyhdr}  % custom headers/footers
