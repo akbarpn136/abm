@@ -29,7 +29,13 @@ class Pemilih(RandomWalker):
         pemilih = [obj for obj in pemilih_sekitar if isinstance(obj, Pemilih)]
         jumlah_individu = sum(map(lambda individu: individu.keinginan >= self.threshold_max, pemilih))
 
-        noise = self.random.uniform(-0.1, 0.1)
+        homogenkah = self.model.initial_tipe_pemilih == "Homogen"
+
+        if homogenkah:
+            noise = self.random.uniform(-0.1, 0.1)
+        else:
+            noise = self.random.gauss(0.0, 0.1)
+
         if len(pemilih) > 0:
             if jumlah_individu / len(pemilih) >= 0.7:
                 self.keinginan += self.peforma + noise * self.skor
