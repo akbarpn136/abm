@@ -35,7 +35,7 @@ Pada model Miller dan Page, Terdapat sebuah auditorium berukuran $L \times L$ ya
 Pada langkah selanjutnya, agen akan meninjau sekelilingnya jika sekelilingnya menunjukkan perilaku yang berbeda maka agen dapat merubah keputusannya. Model Miller dan page membuat dua jenis environment yaitu lima tetangga dan kerucut.
 
 \begin{itemize}
-	\item Pada skenario lima tetangga, agen akan memperhatikan agen yang berada di samping kanan, kiri, depan, dan belakang seperti Table \ref{tbl:formasi_sop}.
+	\item Pada skenario empat tetangga, agen akan memperhatikan agen yang berada di samping kanan, kiri, depan, dan belakang seperti Table \ref{tbl:formasi_sop}.
 
 	\begin{table}[H]
 		\centering
@@ -48,7 +48,7 @@ Pada langkah selanjutnya, agen akan meninjau sekelilingnya jika sekelilingnya me
 			F & \cellcolor{gray!30}F & F \\
 			\hline
 		\end{tabular}
-		\caption{Formasi lima tetangga}
+		\caption{Formasi empat tetangga}
 		\label{tbl:formasi_sop}
 	\end{table}
 
@@ -181,3 +181,32 @@ Berdasarkan Persamaan \ref{eq:sop_mesa} di atas dapat dijelaskan faktor yang dap
 
 \item Insentive atau uang menjadi faktor dalam studi kasus pemilihan umum dengan SOP ini. Uang diterima oleh pemilih melalui pemberian agen bayaran saat agen-agen tersebut bertemu. Uang yang diberikan oleh agen bayaran kemudian dikategorikan ke dalam tiga kelompok oleh calon pemilih yaitu \texttt{kecil}, \texttt{sedang}, atau \texttt{besar}.
 \end{itemize}
+
+\subsubsection{Aturan Sederhana}
+
+Untuk membangun model di ABM, diperlukan aturan-aturan sederhana. Secara umum, pemodelan SOP ini di \texttt{Mesa} melibatkan baik agen bayaran dan agen pemilih dapat bergerak secara acak. Memang berbeda dari pemodelan SOP \cite{miller2004standing} dimana agen-agen tidak bergerak, namun pemodelan pemilihan umum di lapangan melibatkan agen bayaran yang bergerak bebas tanpa dikoordinir dan begitu juga dengan agen pemilih dapat bergerak bebas. Pergerakan acak dari agen bayaran dilakukan ke delapan arah (\textit{Moore}) apabila dibuat dalam bentuk grid seperti Tabel \ref{tbl:formasi_moore} di bawah. Lain halnya dengan agen pemilih, pergerakan agen ini diberikan dua opsi dapat berupa \textit{Moore} atau \textit{Von Neuman} (seperti Tabel \ref{tbl:formasi_sop}) \cite{zaitsev2017generalized}. Opsi ini diberikan untuk melihat pengaruh dari batasan pergerakan dari agen pemilih.
+
+\begin{table}[H]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\cellcolor{gray!10}G & \cellcolor{gray!10}G & \cellcolor{gray!10}G & \cellcolor{gray!10}G & \cellcolor{gray!10}G \\
+		\hline
+		\cellcolor{gray!10}G & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!10}G \\
+		\hline
+		\cellcolor{gray!10}G & \cellcolor{gray!30}F & \cellcolor{gray!50}X & \cellcolor{gray!30}F & \cellcolor{gray!10}G \\
+		\hline
+		\cellcolor{gray!10}G & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!30}F & \cellcolor{gray!10}G \\
+		\hline
+		\cellcolor{gray!10}G & \cellcolor{gray!10}G & \cellcolor{gray!10}G & \cellcolor{gray!10}G & \cellcolor{gray!10}G \\
+		\hline
+		\end{tabular}
+		\caption{Formasi delapan tetangga}
+		\label{tbl:formasi_moore}
+	\end{table}
+
+Disamping aturan pergerakan, agen pemilih diberikan aturan jarak observasi ke tetangga sekitar. Jarak terdekat adalah sebesar 1 satuan grid. Penggunaan jarak observasi ini merupakan bagian dari terapan pemodelan dengan SOP. Dengan menerapkan jarak observasi ini dapat memberikan pengaruh "pasif" terhadap keinginan memilih bahkan dengan ketika agen bayaran sudah tidak ada. Maksud dari pengaruh "pasif" adalah agen pemilih yang tadinya ragu-ragu atau memang yakin tidak memilih dapat berubah menjadi ikut memilih karena faktor dari tetangga sekitar dengan jarak pengaruh tertentu. Dalam rentang jarak tersebut akan diakumulasi sehingga pemilih lain di sekitar lebih besar dari $70\%$ maka calon pemilih tersebut ikut memilih (\textit{standing}).
+
+Aturan lainnya adalah masing-masing agen juga ditambahkan aturan berkaitan dengan uang atau insentif seperti yang diformulasikan dalam Persamaan \ref{eq:sop_mesa}. Agen bayaran dibekali dengan uang sebagai modal awal dalam upaya mempengaruhi keputusan pilihan calon pemilih. Uang awal ini dapat diubah di aplikasi apabila ingin melakukan variasi simulasi. Dalam hal pembagian uang, agen bayaran bersifat homogen. Jumlah uang yang dikeluarkan memiliki besaran yang sama ke setiap agen pemilih dan ini menjadi \textbf{batasan} dalam pemodelan yang dilakukan. Bisa saja terjadi pembayaran yang bersifat heterogen, yaitu agen bayaran berlaku curang dalam mengeluarkan jumlah uang ke agen pemilih namun hal demikian tidak dilakukan. Agen bayaran akan pergi apabila uang yang dibagikan sudah habis. Dari sisi agen pemilih, uang menjadi masukan dan dapat mempengaruhi keputusan memilih. Pemberian uang dari agen bayaran akan ditransformasikan ke dalam bentuk kategori yang sudah disampaikan sebelumnya.
+
+Masing-masing agen pemilih dalam model diberikan opsi di aplikasi bersifat homogen (agen pemilih memiliki kecenderungan karakter atau kebiasaan yang mirip) atau heterogen. Berdasarkan opsi ini, memberikan pengaruh terhadap \textit{threshold} awal calon pemilih apakah saat itu \texttt{yakin memilih}, \texttt{ragu-ragu}, atau \texttt{tidak memilih}. Disamping itu juga, opsi ini memberikan pengaruh terhadap variabel \textit{noise} dalam Persamaan \ref{eq:sop_mesa}.
