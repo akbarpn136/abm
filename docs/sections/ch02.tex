@@ -107,7 +107,7 @@ Dengan $Q_{campaign}$ merupakan kualitas kampanye dari calon atau kandidat, $thr
 Dengn menggunakan aturan sederhana tersebut diatas, model sederhana dapat digunakan untuk mendekati bagaimana perilaku pemilih dalam pemilihan umum dalam sebuah Algoritma \ref{alg:sop_sederhana} sebagai berikut:
 
 \begin{algorithm}
-\caption{Algoritma model sederhana}\label{alg:sop_sederhana}
+\caption{Model sederhana}\label{alg:sop_sederhana}
 	\begin{algorithmic}[1]
 	\Procedure{InitModel}{}
 		\State $Setup$
@@ -182,7 +182,7 @@ Berdasarkan Persamaan \ref{eq:sop_mesa} di atas dapat dijelaskan faktor yang dap
 \item Insentive atau uang menjadi faktor dalam studi kasus pemilihan umum dengan SOP ini. Uang diterima oleh pemilih melalui pemberian agen bayaran saat agen-agen tersebut bertemu. Uang yang diberikan oleh agen bayaran kemudian dikategorikan ke dalam tiga kelompok oleh calon pemilih yaitu \texttt{kecil}, \texttt{sedang}, atau \texttt{besar}.
 \end{itemize}
 
-\subsubsection{Aturan Sederhana}
+\subsubsection{Aturan Sederhana}\label{sec:sbab_aturansederhana}
 
 Untuk membangun model di ABM, diperlukan aturan-aturan sederhana. Secara umum, pemodelan SOP ini di \texttt{Mesa} melibatkan baik agen bayaran dan agen pemilih dapat bergerak secara acak. Memang berbeda dari pemodelan SOP \cite{miller2004standing} dimana agen-agen tidak bergerak, namun pemodelan pemilihan umum di lapangan melibatkan agen bayaran yang bergerak bebas tanpa dikoordinir dan begitu juga dengan agen pemilih dapat bergerak bebas. Pergerakan acak dari agen bayaran dilakukan ke delapan arah (\textit{Moore}) apabila dibuat dalam bentuk grid seperti Tabel \ref{tbl:formasi_moore} di bawah. Lain halnya dengan agen pemilih, pergerakan agen ini diberikan dua opsi dapat berupa \textit{Moore} atau \textit{Von Neuman} (seperti Tabel \ref{tbl:formasi_sop}) \cite{zaitsev2017generalized}. Opsi ini diberikan untuk melihat pengaruh dari batasan pergerakan dari agen pemilih.
 
@@ -210,3 +210,125 @@ Disamping aturan pergerakan, agen pemilih diberikan aturan jarak observasi ke te
 Aturan lainnya adalah masing-masing agen juga ditambahkan aturan berkaitan dengan uang atau insentif seperti yang diformulasikan dalam Persamaan \ref{eq:sop_mesa}. Agen bayaran dibekali dengan uang sebagai modal awal dalam upaya mempengaruhi keputusan pilihan calon pemilih. Uang awal ini dapat diubah di aplikasi apabila ingin melakukan variasi simulasi. Dalam hal pembagian uang, agen bayaran bersifat homogen. Jumlah uang yang dikeluarkan memiliki besaran yang sama ke setiap agen pemilih dan ini menjadi \textbf{batasan} dalam pemodelan yang dilakukan. Bisa saja terjadi pembayaran yang bersifat heterogen, yaitu agen bayaran berlaku curang dalam mengeluarkan jumlah uang ke agen pemilih namun hal demikian tidak dilakukan. Agen bayaran akan pergi apabila uang yang dibagikan sudah habis. Dari sisi agen pemilih, uang menjadi masukan dan dapat mempengaruhi keputusan memilih. Pemberian uang dari agen bayaran akan ditransformasikan ke dalam bentuk kategori yang sudah disampaikan sebelumnya.
 
 Masing-masing agen pemilih dalam model diberikan opsi di aplikasi bersifat homogen (agen pemilih memiliki kecenderungan karakter atau kebiasaan yang mirip) atau heterogen. Berdasarkan opsi ini, memberikan pengaruh terhadap \textit{threshold} awal calon pemilih apakah saat itu \texttt{yakin memilih}, \texttt{ragu-ragu}, atau \texttt{tidak memilih}. Disamping itu juga, opsi ini memberikan pengaruh terhadap variabel \textit{noise} dalam Persamaan \ref{eq:sop_mesa}.
+
+\subsubsection{Alur Kerja dan Pemodelan di Mesa}\label{sec:sbab_alurkerja}
+
+Secara garis besar, model dengan \texttt{Mesa} ini melibatkan alur dari data masukan pengguna, model, dan hasil. Alur ini dapat diilustrasikan seperti Gambar \ref{fig:flowsopabm} dibawah.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{images/ch02/FlowSopAbm}
+\caption{Diagram alir penerapan modifikasi model SOP}
+\label{fig:flowsopabm}
+\end{figure}
+
+Saat pengguna mulai menjalankan aplikasi dengan  \texttt{Mesa}, bagian yang diperlukan pertama kali adalah \texttt{inputs}. Bagian ini terdiri dari peforma atau kualitas calon pemimpin, jumlah agen bayaran, jumlah pemilih, tipe pemilih, tipe tetangga, radius pengamatan pemilih, jumlah uang atau modal awal, dan jumlah uang yang dikeluarkan.
+
+Peforma calon pemimpin diberikan rentang nilai 0.1 hingga 1 dengan nilai awal adalah 0.5. Peforma kampanye dinilai buruk jika bernilai minimum dan baik jika bernilai maksimum. Dalam pemodelan ini, jumlah agen bayaran memiliki rentang nilai 1 hingga 15 dengan nilai awal adalah 10. Untuk agen pemilih, rentang jumlah pemilih dari 50 hingga 350 dengan nilai awal adalah 100. Tipe pemilih memiliki dua opsi yaitu homogen dan heterogen serta jenis tetangga (\textit{neighbour}) ada dua yaitu \textit{Moore} (delapan arah) dan \textit{Von Neumann} (empat arah). Untuk agen bayaran dibekali sejumlah uang dengan rentang 100 hingga 1000 dengan nilai awal adalah sebesar 500. Terakhir, jumlah uang yang dikeluarkan dengan rentang dari 10 hingga 50 dengan nilai pengeluaran awal sebesar 25.
+
+Selanjutnya adalah bagian proses modifikasi model pemilihan umum dengan SOP di ABM. Sudah dijelaskan sebelumnya bahwa model ini dibekali dengan aturan-aturan sederhana dan terdiri dari agen-agen bayaran dan pemilih. Untuk itu, model ini dibangun sesuai dengan Algoritma \ref{alg:modelagenbayaran} berikut ini\footnote{Untuk \textit{source code} dapat diakses di \url{https://github.com/akbarpn136/abm}}.
+
+\begin{algorithm}[H]
+	\caption{Model Agen Bayaran}\label{alg:modelagenbayaran}
+	\begin{algorithmic}[1]
+		\Procedure{AgenBayaran}{}\Comment{Modifikasi SOP untuk agen bayaran}
+			\State $self.width \gets width$\Comment{lebar grid}
+			\State $self.height \gets height$\Comment{tinggi grid}
+			\State $self.peforma \gets peforma$
+			\State $self.radius\_pengamatan \gets radius\_pengamatan$
+			\State $self.pengeluaran\_uang \gets pengeluaran\_uang$
+			\State $self.initial\_uang \gets initial\_uang$
+			\State $self.initial\_agen\_bayaran \gets initial\_agen\_bayaran$
+			\State $self.initial\_pemilih \gets initial\_pemilih$
+			\State $self.initial\_tipe\_pemilih \gets initial\_tipe\_pemilih$
+			\State $self.initial\_tipe\_tetangga \gets initial\_tipe\_tetangga$
+			\\ \Comment{mulai membuat agen bayaran}
+			\For{$i=0$ to $i=self.initial\_agen\_bayaran$}\label{balg:buatagenbayaran}
+				\State $position \gets random\_range(self.width, self.heigth)$
+				\State $bayaran \gets Bayaran(id,position,Moore,self.initial\_uang)$
+				\State $grid.place\_agent(bayaran, position)$
+			\EndFor
+
+			\\ \Comment{mulai membuat agen pemilih}
+			\For{$j=0$ to $j=self.initial\_pemilih$}\label{balg:buatagenpemilih}
+				\State $position \gets random\_range(self.width, self.heigth)$\label{balg:posisiacakpemilih}
+				\State $tipe\_tetangga \gets self.initial\_tipe\_tetangga == "Moore"$\label{balg:tipetetangga}
+				\\
+				\If{$self.initial\_tipe\_pemilih == "Homogen"$}\label{balg:pemilihankeinginan}
+					\State $keinginan \gets random.uniform(0, 1)$
+				\Else
+					\State $keinginan \gets random.gauss(0.5, 0.4)$
+				\EndIf
+				\\
+				\State $pemilih \gets Pemilih(id, position, tipe\_tetangga, keinginan)$
+				\State $grid.place\_agent(pemilih, position)$
+			\EndFor
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+Memang tidak diragukan lagi bahwa agen bayaran dan pemilih ditempatkan pada posisi acak saat awal simulasi dimulai. Hal ini dapat dilihat dalam Algoritma \ref{alg:modelagenbayaran} pada baris \ref{balg:buatagenbayaran} dan \ref{balg:buatagenpemilih}. Untuk agen bayaran membutuhkan prosedur \texttt{Bayaran} seperti Algoritma \ref{alg:agenbayaran} dengan argumen-argumen yang sudah dijelaskan pada sub bab \ref{sec:sbab_aturansederhana}.
+
+Untuk agen pemilih membutuhkan prosedur \texttt{Pemilih} seperti Algoritma \ref{alg:agenpemilih}. Prosedur \texttt{Pemilih} membutuhkan variabel pada baris \ref{balg:posisiacakpemilih}, \ref{balg:tipetetangga}, dan \ref{balg:pemilihankeinginan}.
+
+\begin{algorithm}[H]
+	\caption{Agen Bayaran}\label{alg:agenbayaran}
+	\begin{algorithmic}[1]
+		\Procedure{Bayaran}{id,position,moore,uang}
+			\State $this\_cell \gets grid.get\_cell\_list\_contents([position])$
+			\While{$loop \gets True$}
+				\If{$isinstance(obj, Pemilih)$}\label{balg:periksajenisagen}
+					\State $pemilih \gets append(obj)$\Comment{Simpan sebagai array pemilih}
+				\EndIf
+
+				\If{$len(pemilih)>0$}\label{balg:cekjumlahpemilih}
+					\State $pemberian \gets pengeluaran\_uang$\Comment{beri uang ke pemilih}
+					\State $self.uang -= pengeluaran\_uang$
+				\EndIf
+
+				\If{$self.uang \leq 0$}\label{balg:hapusagenbayaran}
+					\State $grid.remove\_agent(self.position)$
+				\EndIf
+			\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+Agen bayaran dibangun dengan aturan-aturan sederhana. Hal ini dikarenakan setiap gerakan acak agen ini melalui tahap pemeriksaan. Pemeriksaan pertama adalah pada baris \ref{balg:periksajenisagen}, ada kemungkinan agen bayaran bertemu dengan lebih dari satu agen pemilih. Apabila itu adalah agen pemilih makan agen bayaran menyimpan agen tadi kedalam kumpulan pemilih. Pada baris \ref{balg:cekjumlahpemilih}, apabila bertemu agen pemilih maka uang akan diberikan ke agen tersebut dan uang akan dikurangi. Aturan terakhir adalah pada baris \ref{balg:hapusagenbayaran} yaitu apabila uang agen bayaran sudah habis maka agen akan pergi.
+
+\begin{algorithm}[H]
+	\caption{Agen Pemilih}\label{alg:agenpemilih}
+	\begin{algorithmic}[1]
+		\Procedure{Pemilih}{id,position,moore,keinginan}
+			\State $pemberian \gets 0$
+			\State $thrsh \gets 0.8$\Comment{threshold}
+			\State $radius \gets radius\_pengamatan$
+
+			\If{$pemberian \leq 10$}\label{balg:periksabesarpemberian}
+				\State $skor \gets 0.01$
+			\ElsIf{$10 < pemberian < 25$}
+				\State $skor \gets 0.2$
+			\Else
+					\State $skor \gets 0.5$
+			\EndIf
+
+			\While{$loop \gets True$}
+				\State $pemilih \gets grid.get\_neighbors(position, moore, radius)$\label{balg:tetanggapemilih}
+				\State $jumlah\_individu \gets sum(map(keinginan \geq thrsh,pemilih))$\label{balg:lakukanakumulasipemilih}
+				\State $homogenkah \gets initial\_tipe\_pemilih == "Homogen"$
+
+				\If{homogenkah}\label{balg:ceknoisehomogen}
+					\State $noise \gets random.uniform(-0.1, 0.1)$
+				\Else
+					\State $noise \gets random.gauss(0.0, 0.1)$
+				\EndIf
+
+				\If{$jumlah\_individu / len(pemilih) \geq 0.7$}\label{balg:hitungkeinginan}
+					\State $keinginan += peforma + noise * skor$
+				\EndIf
+			\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+Berdasarkan aturan sederhana dalam pemodelan pemilihan umum dengan SOP, agen pemilih dapat menerima uang atau insentif dari agen bayaran. Uang yang diterima ditransformasikan kedalam kategori sederhana seperti baris \ref{balg:periksabesarpemberian} yaitu $kecil=0.01$, $sedang=0.2$, dan $besar=0.5$. Pada baris \ref{balg:tetanggapemilih}, dilakukan dengan mengikuti konsep radius pengamatan di SOP dengan besar radius dengan rentang tertentu seperti yang sudah disampaikan sub bab \ref{sec:sbab_alurkerja}. Pada baris selanjutnya yaitu baris \ref{balg:lakukanakumulasipemilih} melakukan penjumlahan masing-masing agen dengan keinginan besar untuk memilih. Untuk perhitungan \textit{noise} dilakukan pada baris \ref{balg:ceknoisehomogen}. Apabila akumulasi tetangga sekitar lebih besar dari $70\%$ yakin memilih sesuai baris \ref{balg:hitungkeinginan} maka Persamaan \ref{eq:sop_mesa} dapat dilakukan. Jadi, apabila keinginan masing-masing agen pemilih lebih besar dari \textit{threshold} maka agen pemilih yakin untuk memilih.
