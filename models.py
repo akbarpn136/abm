@@ -23,6 +23,7 @@ class AgenBayaran(Model):
             pengeluaran_uang=50,
             initial_agen_bayaran=10,
             initial_pemilih=100,
+            initial_tipe_pemilih="Homogen",
             initial_tipe_tetangga="Moore"
     ):
         super().__init__()
@@ -35,6 +36,7 @@ class AgenBayaran(Model):
         self.initial_uang = initial_uang
         self.initial_agen_bayaran = initial_agen_bayaran
         self.initial_pemilih = initial_pemilih
+        self.initial_tipe_pemilih = initial_tipe_pemilih
         self.initial_tipe_tetangga = initial_tipe_tetangga
 
         self.schedule = RandomActivation(self)
@@ -62,7 +64,13 @@ class AgenBayaran(Model):
             y = self.random.randrange(self.height)
 
             tipe_tetangga = self.initial_tipe_tetangga == "Moore"
-            keinginan = self.random.uniform(0, 1)
+            homogenkah = self.initial_tipe_pemilih == "Homogen"
+
+            if homogenkah:
+                keinginan = self.random.uniform(0, 1)
+            else:
+                keinginan = self.random.gauss(0.5, 0.4)
+
             pemilih = Pemilih(self.next_id(), (x, y), self, tipe_tetangga, keinginan)
             self.grid.place_agent(pemilih, (x, y))
             self.schedule.add(pemilih)
