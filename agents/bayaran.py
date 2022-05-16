@@ -19,9 +19,11 @@ class Bayaran(RandomWalker):
 
         if len(pemilih) > 0:
             pengaruhi_pemilih = self.random.choice(pemilih)
-            pengaruhi_pemilih.pemberian = self.model.pengeluaran_uang
 
-            self.uang -= self.model.pengeluaran_uang
+            if pengaruhi_pemilih.terima == False:
+                pengaruhi_pemilih.pemberian = self.model.pengeluaran_uang
+
+                self.uang -= self.model.pengeluaran_uang
 
         if self.uang <= 0:
             self.model.grid._remove_agent(self.pos, self)
