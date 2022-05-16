@@ -7,12 +7,20 @@ class Pemilih(RandomWalker):
     Agen ini ada yang masih ragu-ragu untuk memilih dan sudah memiliki pilihan.
     """
     pemberian = 0
+    terima = False
 
     def __init__(self, unique_id, pos, model, moore, keinginan=None):
         super().__init__(unique_id, pos, model, moore=moore)
         self.keinginan = keinginan
-        self.threshold = 0.8
+        self.threshold_max = 0.6
+        self.threshold_min = 0.5
         self.peforma = model.peforma
+
+    def step(self):
+        self.random_move()
+
+        if self.pemberian > 0:
+            self.terima = True
 
         if self.pemberian <= 10:
             self.skor = 0.01
@@ -21,12 +29,9 @@ class Pemilih(RandomWalker):
         else:
             self.skor = 0.5
 
-    def step(self):
-        self.random_move()
-
         pemilih_sekitar = self.model.grid.get_neighbors(self.pos, self.moore, True, self.model.radius_pembanding)
         pemilih = [obj for obj in pemilih_sekitar if isinstance(obj, Pemilih)]
-        jumlah_individu = sum(map(lambda individu: individu.keinginan >= self.threshold, pemilih))
+        jumlah_individu = sum(map(lambda individu: individu.keinginan >= self.threshold_max, pemilih))
 
         homogenkah = self.model.initial_tipe_pemilih == "Homogen"
 
