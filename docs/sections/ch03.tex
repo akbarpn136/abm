@@ -362,3 +362,188 @@ Pada Gambar \ref{fig:pemilusop12} berikut, jumlah pemilih sekitar yang akan memp
 Dengan parameter seperti gambar diatas, jumlah pemilih yang Standing (memilih) akan meningkat dibandingkan dengan sebelumnya dan jumlah pemilih Standing $271$ lebih besar dibandingkan dengan pemilih Sitdown $195$. Pada sisi lain, terjadi penurunan jumlah pemilih terima uang yang tetap Sitdown (tidak memilih) $21$ dari sebelumnya $36$.
 
 Perlu diketahui juga dari hasil simulasi ini, untuk masyarakat pemilih yang lebih mandiri (independen), dengan nilai $neighbor\_stand=8$, pengaruh pemberian uang tidak dapat membuat jumlah pemilih Standing (memilih) lebih besar dari pemilih yang Sitdown (tidak memilih).
+
+\subsection{Model Pemilihan dengan SOP di Python Mesa}
+
+Setelah memahami penggunaan Persamaan \ref{eq:sop_mesa} serta penjelasan ringkas terhadap Algoritma \ref{alg:modelagenbayaran}, \ref{alg:agenbayaran}, dan \ref{alg:agenpemilih} maka pemodelan pemilihan umum dengan SOP di ABM dapat dibuat ke dalam bentuk aplikasi berbasis web \cite{Zikri_Modified_Standing_Ovation_2021} dengan tampilan umum seperti Gambar \ref{fig:mesa0}. Ada beberapa skenario yang akan dilakukan, adapun penjelasannya sebagai berikut.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{images/ch03/mesa0}
+\caption{Aplikasi berbasis web dengan Python Mesa}
+\label{fig:mesa0}
+\end{figure}
+
+
+\subsubsection{Skenario Pesimis}
+
+Pada skenario ini konfigurasi \texttt{input} diatur seminimal mungkin. Hal ini dapat dilihat dalam Tabel \ref{tab:pengaturanpesimis} dibawah dengan $N_{ab}$ adalah jumlah agen bayaran, $N_{p}$ adalah jumlah pemilih, dan $R$ adalah radius pengamatan.
+
+\begin{table}[H]
+\centering
+\caption{Pengaturan aplikasi untuk skenario pesimis}
+	\begin{tabular}{cccccccc}
+	\hline
+	Peforma & $N_{ab}$ & $N_{p}$ & $Tipe_{pemilih}$ & $Tipe_{tetangga}$ & R & uang & keluar \\
+	\hline
+	0.1 & 1 & 50 & Heterogen & Von Neumann & 1 & 100 & 10\\
+	\hline
+	\end{tabular}
+  \label{tab:pengaturanpesimis}
+\end{table}
+
+Dengan pengaturan diatas, didapatkan sebaran acak awal untuk masing-masing agen bayaran dan pemilih seperti Gambar \ref{fig:mesa1}. Perlu diketahui bahwa dalam aplikasi berbasis web ini memiliki beberapa simbol. Adapun penjelasan dari masing-masing simbol sebagai berikut.
+
+\begin{table}[H]
+\centering
+\caption{Simbol-simbol dalam keseluruhan aplikasi}
+	\begin{tabular}{cccc}
+	\hline
+	Avatar & Merah & Abu-abu & Hijau \\
+	\hline
+	Agen bayaran & Pemilih tidak milih & Pemilih ragu & Pemilih milih \\
+	\hline
+	\end{tabular}
+  \label{tab:simbolaplikasi}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{images/ch03/mesa1}
+\caption{Sebaran acak awal pada skenario pesimis}
+\label{fig:mesa1}
+\end{figure}
+
+Apabila simulasi ini dijalankan selama 1065 iterasi, agen bayaran sudah meninggalkan tempat seperti Gambar \ref{sfig:mesa2} karena walaupun uang yang dikeluarkan sedikit sebesar 10 namun modal awal yang dipegang hanya 100. Dengan kata lain, agen bayaran hanya dapat memberikan uang 10 kali kepada agen pemilih.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[Agen bayaran tidak aktif]{
+		\label{sfig:mesa2}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa2}
+	}\hfill
+	\subfloat[Saat $t=1065$]{
+		\label{sfig:mesa3}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa3}
+	}\hfill
+	\caption{Simulasi pemilihan di skenario pesimis}
+	\label{fig:simulasi_mesa_pesimis}
+\end{figure}
+
+Berdasarkan Gambar \ref{sfig:mesa3}, perlu iterasi yang lama agar agen pemilih mulai terpengaruh untuk yakin memilih. Hal ini dapat disebabkan karena peforma calon pemimpin tidak bagus dan disertai konfigurasi lain yang minimum. Kondisi ini dapat terjadi di lapangan, namun hal menarik dapat terjadi di skenario pesimis ini yaitu dengan meningkatkan jarak radius pengamatan dari konsep SOP ini.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[Agen bayaran tidak aktif]{
+		\label{sfig:mesa4}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa4}
+	}\hfill
+	\subfloat[Saat $t=124$]{
+		\label{sfig:mesa5}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa5}
+	}\hfill
+	\caption{Simulasi pemilihan di skenario pesimis dengan radius pengamatan}
+	\label{fig:simulasi_mesa_pesimis_2}
+\end{figure}
+
+Tidak diragukan lagi dari Gambar \ref{sfig:mesa5}, agen pemilih semula tidak memilih atau ragu-ragu, lalu mulai meningkat keinginan untuk memilih walaupun sebenarnya peforma calon pemimpin tidak bagus dan agen bayaran sudah meninggalkan tempat seperti Gambar \ref{sfig:mesa4}. Hal inilah yang membuat skenario pesimis menjadi menarik karena efek dari radius pengamatan agen pemilih yang ditingkatkan menyebabkan pemberian pengaruh menjadi lebih besar. Perlu diketahui juga bahwa disini peforma calon pemimpin tidak baik bisa jadi cara menyampaikan atau komunikasi tidak tepat walaupun sebenarnya calon tersebut memiliki perilaku yang baik dan begitu pula sebaliknya bisa saja peforma baik saat kampanye namun perilaku asli dari calon tidak baik.
+
+Yang patut menjadi pertanyaan adalah bagaimana meningkatkan radius pengamatan di lapangan dengan kondisi minimalis seperti Tabel \ref{tab:pengaturanpesimis}? Dengan meningkatnya penggunaan jejaring sosial, langkah yang dapat diambil dalam rangka agar agen pemilih mau menambahkan radius pengamatan adalah calon pemimpin juga giat dalam memanfaatkan fitur yang diberikan jejaring sosial karena fasilitas ini gratis dan cocok dengan pengeluran yang ketat.
+
+Apabila trafik calon pemilih berhasil didapatkan maka fenomena baru muncul yaitu efek atau pengaruh dari interaksi antar agen pemilih (saling mempengaruhi) diharapkan dapat memberikan \textbf{sentimen positif} terhadap calon pemimpin. Dalam kondisi ini agen bayaran hanya memberikan stimulus awal selnajutnya agen bayaran meniggalkan sistem seperti Gambar \ref{sfig:mesa4} dan sisanya adalah saling mempengaruhi antar agen pemilih dalam jarak radius tertentu.
+
+\subsubsection{Skenario Ideal}
+
+Pada skenario ini konfigurasi \texttt{input} diatur seideal mungkin. Hal ini dapat dilihat dalam Tabel \ref{tab:pengaturanideal} dibawah. Peforma calon pemimpin dianggap "pas-pasan" dalam skenario ini dengan parameter lain disesuaikan.
+
+\begin{table}[H]
+\centering
+\caption{Pengaturan aplikasi untuk skenario ideal}
+\begin{tabular}{cccccccc}
+	\hline
+	Peforma & $N_{ab}$ & $N_{p}$ & $Tipe_{pemilih}$ & $Tipe_{tetangga}$ & R & uang & keluar \\
+	\hline
+	0.5 & 10 & 100 & Homogen & Moore & 2 & 500 & 25\\
+	\hline
+\end{tabular}
+\label{tab:pengaturanideal}
+\end{table}
+
+Apabila simulasi ini dijalankan pada iterasi 84, agen pemilih mulai terpengaruh (Gambar \ref{sfig:mesa7}) untuk memilih dan agen bayaran masih aktif melakukan tebar pengaruh ke calon pemilih lainnya seperti Gambar \ref{sfig:mesa6} berikut.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[Agen bayaran masih aktif]{
+		\label{sfig:mesa6}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa6}
+	}\hfill
+	\subfloat[Saat $t=84$]{
+		\label{sfig:mesa7}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa7}
+	}\hfill
+	\caption{Simulasi pemilihan di skenario ideal}
+	\label{fig:simulasi_mesa_ideal}
+\end{figure}
+
+Seperti yang diharapkan terjadi dalam skenario ideal ini yaitu calon pemimpin dengan mudah memberikan pengaruh melalui stimulus agen bayaran agar calon pemilih mau memilih. Namun yang menjadi catatan disini adalah agen bayaran terus berada dalam sistem karena masing-masing agen masih menyimpan uang yang dapat dibagikan tapi agen pemilih sudah terpengaruh untuk ikut memilih. Sesuai dengan aturan sederhana pada sub bab \ref{sec:sbab_aturansederhana}, agen bayaran akan meninggalkan grid ketika uang sudah habis dibagikan.
+
+\subsubsection{Skenario Optimis}
+
+Pada skenario ini konfigurasi \texttt{input} diatur seoptimis mungkin. Hal ini dapat dilihat dalam Tabel \ref{tab:pengaturanoptimis} dibawah. Peforma calon pemimpin dianggap sempurna dalam skenario ini. Adapun sebaran acak awal untuk skenario optimis tampak pada Gambar \ref{fig:mesa8} berikut.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{images/ch03/mesa8}
+\caption{Sebaran acak awal masing-masing agen}
+\label{fig:mesa8}
+\end{figure}
+
+
+\begin{table}[H]
+\centering
+\caption{Pengaturan aplikasi untuk skenario ideal}
+\begin{tabular}{cccccccc}
+	\hline
+	Peforma & $N_{ab}$ & $N_{p}$ & $Tipe_{pemilih}$ & $Tipe_{tetangga}$ & R & uang & keluar \\
+	\hline
+	1 & 15 & 350 & Heterogen & Moore & 4 & 1000 & 50\\
+	\hline
+\end{tabular}
+\label{tab:pengaturanoptimis}
+\end{table}
+
+Apabila simulasi dijalankan selama 185 iterasi, tampak bahwa semua agen bayaran sudah meninggalkan sistem seperti Gambar \ref{sfig:mesa9}. Berdasarkan Gambar \ref{sfig:mesa10} pula, hal yang mengagetkan terjadi yaitu agen bayaran tidak berhasil mempengaruhi agen pemilih untuk yakin memilih secara keseluruhan. Hal ini menjadi suatu anomali karena memiliki peforma yang sempurna dengan agen bayaran yang banya serta modal yang besar tapi tetap tidak memberi pengaruh yang besar.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[Agen bayaran tidak aktif]{
+		\label{sfig:mesa9}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa9}
+	}\hfill
+	\subfloat[Saat $t=185$]{
+		\label{sfig:mesa10}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa10}
+	}\hfill
+	\caption{Simulasi pemilihan di skenario optimis}
+	\label{fig:simulasi_mesa_optimis}
+\end{figure}
+
+Apabila anomali ini dianalisis lebih lanjut lagi, penyebab yang dapat memicu fenomena ini adalah jarak radius pengamatan agen pemilih yang terlalu besar. Denga radius yang besar untuk kawasan yang dominan dengan agen pemilih yang tidak yakin memilih dapat memberikan hasil akumulasi masing-masing agen pemilih untuk tetap pada pendiriannya (tidak memilih ataupun ragu-ragu), sedangkan agen pemilih yang yakin pun kesusahan dalam memberikan pengaruh melalui interaksi agar agen lain ikut terpengaruh. Bisa saja dari faktor pengaruh dari oposisi sehingga dalam kawasan tersebut lebih dominan tidak memilih calon pemimpin tersebut.
+
+Teknik yang dapat digunakan untuk menyiasati ini adalah dengan mengurangi jarak radius pengamatan agen pemilih sehingga dampak dari sentimen negatif dapat dihindari. Sebagai contoh dalam skenario optimis ini, radius pengamatan dikurangi menjadi $R=2$. Hasil simulasi dapat dilihat melalui Gambar \ref{sfig:mesa12}.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[Agen bayaran aktif]{
+		\label{sfig:mesa11}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa11}
+	}\hfill
+	\subfloat[Saat $t=119$]{
+		\label{sfig:mesa12}
+		\includegraphics[width=0.48\linewidth]{images/ch03/mesa12}
+	}\hfill
+	\caption{Simulasi pemilihan di skenario optimis dengan pengurangan radius pengamatan}
+	\label{fig:simulasi_mesa_optimis_radius}
+\end{figure}
+
+Walaupun jejaring sosial memiliki pengaruh luas sehingga dapat memberikan radius pengamatan yang besar, namun terkadang pengaruh tersebut perlu dikurangi. Cara mengurangi radius pengamatan di lapangan dapat dilakukan dengan cara menggunakan \textit{buzzer} untuk membalikkan sentimen menjadi positif. Memang dalam pemodelan yang dilakukan saat ini tidak menerapkan analisis dari pengaruh \textit{buzzer} secara langsung.

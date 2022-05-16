@@ -226,7 +226,7 @@ Saat pengguna mulai menjalankan aplikasi dengan  \texttt{Mesa}, bagian yang dipe
 
 Peforma calon pemimpin diberikan rentang nilai 0.1 hingga 1 dengan nilai awal adalah 0.5. Peforma kampanye dinilai buruk jika bernilai minimum dan baik jika bernilai maksimum. Dalam pemodelan ini, jumlah agen bayaran memiliki rentang nilai 1 hingga 15 dengan nilai awal adalah 10. Untuk agen pemilih, rentang jumlah pemilih dari 50 hingga 350 dengan nilai awal adalah 100. Tipe pemilih memiliki dua opsi yaitu homogen dan heterogen serta jenis tetangga (\textit{neighbour}) ada dua yaitu \textit{Moore} (delapan arah) dan \textit{Von Neumann} (empat arah). Untuk agen bayaran dibekali sejumlah uang dengan rentang 100 hingga 1000 dengan nilai awal adalah sebesar 500. Terakhir, jumlah uang yang dikeluarkan dengan rentang dari 10 hingga 50 dengan nilai pengeluaran awal sebesar 25.
 
-Selanjutnya adalah bagian proses modifikasi model pemilihan umum dengan SOP di ABM. Sudah dijelaskan sebelumnya bahwa model ini dibekali dengan aturan-aturan sederhana dan terdiri dari agen-agen bayaran dan pemilih. Untuk itu, model ini dibangun sesuai dengan Algoritma \ref{alg:modelagenbayaran} berikut ini\footnote{Untuk \textit{source code} dapat diakses di \url{https://github.com/akbarpn136/abm}}.
+Selanjutnya adalah bagian proses modifikasi model pemilihan umum dengan SOP di ABM. Sudah dijelaskan sebelumnya bahwa model ini dibekali dengan aturan-aturan sederhana dan terdiri dari agen-agen bayaran dan pemilih. Untuk itu, model ini dibangun sesuai dengan Algoritma \ref{alg:modelagenbayaran} berikut ini \footnote{Untuk \textit{source code} dapat diakses di \url{https://github.com/akbarpn136/abm}}.
 
 \begin{algorithm}[H]
 	\caption{Model Agen Bayaran}\label{alg:modelagenbayaran}
@@ -276,16 +276,17 @@ Untuk agen pemilih membutuhkan prosedur \texttt{Pemilih} seperti Algoritma \ref{
 	\begin{algorithmic}[1]
 		\Procedure{Bayaran}{id,position,moore,uang}
 			\State $this\_cell \gets grid.get\_cell\_list\_contents([position])$
+			\\
 			\While{$loop \gets True$}
 				\If{$isinstance(obj, Pemilih)$}\label{balg:periksajenisagen}
 					\State $pemilih \gets append(obj)$\Comment{Simpan sebagai array pemilih}
 				\EndIf
-
-				\If{$len(pemilih)>0$}\label{balg:cekjumlahpemilih}
+				\\
+				\If{$len(pemilih)>0 \And pemilih.terima == False$}\label{balg:cekjumlahpemilih}
 					\State $pemberian \gets pengeluaran\_uang$\Comment{beri uang ke pemilih}
 					\State $self.uang -= pengeluaran\_uang$
 				\EndIf
-
+				\\
 				\If{$self.uang \leq 0$}\label{balg:hapusagenbayaran}
 					\State $grid.remove\_agent(self.position)$
 				\EndIf
@@ -294,25 +295,30 @@ Untuk agen pemilih membutuhkan prosedur \texttt{Pemilih} seperti Algoritma \ref{
 	\end{algorithmic}
 \end{algorithm}
 
-Agen bayaran dibangun dengan aturan-aturan sederhana. Hal ini dikarenakan setiap gerakan acak agen ini melalui tahap pemeriksaan. Pemeriksaan pertama adalah pada baris \ref{balg:periksajenisagen}, ada kemungkinan agen bayaran bertemu dengan lebih dari satu agen pemilih. Apabila itu adalah agen pemilih makan agen bayaran menyimpan agen tadi kedalam kumpulan pemilih. Pada baris \ref{balg:cekjumlahpemilih}, apabila bertemu agen pemilih maka uang akan diberikan ke agen tersebut dan uang akan dikurangi. Aturan terakhir adalah pada baris \ref{balg:hapusagenbayaran} yaitu apabila uang agen bayaran sudah habis maka agen akan pergi.
+Agen bayaran dibangun dengan aturan-aturan sederhana. Hal ini dikarenakan setiap gerakan acak agen ini melalui tahap pemeriksaan. Pemeriksaan pertama adalah pada baris \ref{balg:periksajenisagen}, ada kemungkinan agen bayaran bertemu dengan lebih dari satu agen pemilih. Apabila itu adalah agen pemilih makan agen bayaran menyimpan agen tadi kedalam kumpulan pemilih. Pada baris \ref{balg:cekjumlahpemilih}, apabila bertemu agen pemilih dan agen tersebut belum menerima uang pemberian maka uang akan diberikan ke agen tadi dan uang akan dikurangi dari modal agen bayaran. Aturan terakhir adalah pada baris \ref{balg:hapusagenbayaran} yaitu apabila uang agen bayaran sudah habis maka agen akan pergi.
 
 \begin{algorithm}[H]
 	\caption{Agen Pemilih}\label{alg:agenpemilih}
 	\begin{algorithmic}[1]
 		\Procedure{Pemilih}{id,position,moore,keinginan}
 			\State $pemberian \gets 0$
+			\State $terima \gets False$
 			\State $thrsh \gets 0.8$\Comment{threshold}
 			\State $radius \gets radius\_pengamatan$
 
-			\If{$pemberian \leq 10$}\label{balg:periksabesarpemberian}
-				\State $skor \gets 0.01$
-			\ElsIf{$10 < pemberian < 25$}
-				\State $skor \gets 0.2$
-			\Else
-					\State $skor \gets 0.5$
-			\EndIf
-
 			\While{$loop \gets True$}
+				\If{$pemberian > True$}
+					\State $terima \gets True$
+				\EndIf
+				\\
+				\If{$pemberian \leq 10$}\label{balg:periksabesarpemberian}
+					\State $skor \gets 0.01$
+				\ElsIf{$10 < pemberian < 25$}
+					\State $skor \gets 0.2$
+				\Else
+						\State $skor \gets 0.5$
+				\EndIf
+				\\
 				\State $pemilih \gets grid.get\_neighbors(position, moore, radius)$\label{balg:tetanggapemilih}
 				\State $jumlah\_individu \gets sum(map(keinginan \geq thrsh,pemilih))$\label{balg:lakukanakumulasipemilih}
 				\State $homogenkah \gets initial\_tipe\_pemilih == "Homogen"$
