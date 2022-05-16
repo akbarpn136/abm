@@ -4,6 +4,12 @@ authors:
 - family-names: "Zikri"
   given-names: "Arizal Akbar"
   orcid: "https://orcid.org/0000-0002-7910-9310"
+- family-names: "Wijayasari"
+  given-names: "Winda"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Hermawan"
+  given-names: "Agus"
+  orcid: "https://orcid.org/0000-0000-0000-0000"
 title: "Modified Standing Ovation Problem on General Election in ABM Using Python Mesa"
 version: 1.0.0
 date-released: 2021-05-16
